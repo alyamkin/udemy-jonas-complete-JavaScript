@@ -418,13 +418,15 @@ if (avgDolphins >= 100 && avgDolphins > avgKoalas) {
 
 */
 
+/*
 // Switch statement 26
 
-const day = "monday";
+const day = "wednesday";
 
 switch (day) {
   case "monday":
     console.log(`Plan my course structure`);
+    console.log("Go to coding meetup");
     break;
   case "tuesday":
     console.log("Prepare teories videous");
@@ -432,7 +434,81 @@ switch (day) {
   case "wednesday":
   case "thursday":
     console.log("Write code examples");
+    break;
   case "friday":
-    console.log('Record videous');
-    case
+    console.log("Record videous");
+    break;
+  case "saturday":
+  case "sunday":
+    console.log("Enjoy the weekend");
+    break;
+  default:
+    console.log("Not a valid day!");
 }
+
+// Assignment switch
+const lang = "english";
+
+switch (lang) {
+  case "chinese":
+  case "mandarin":
+    console.log("MOST number of native speakers!");
+    break;
+  case "spanish":
+    console.log("2nd place in number of native speakers");
+    break;
+  case "english":
+    console.log("3rd place");
+    break;
+  case "hindi":
+    console.log("Number 4");
+    break;
+  case "arabic":
+    console.log("5th most spoken language");
+    break;
+  default:
+    console.log("Great language too :D");
+    break;
+}
+*/
+
+/*
+
+// Statements and expressions
+
+// The conditional (ternary) operator 28
+
+const age = 10;
+age >= 18 ? console.log(`I like to drink wine`) : console.log(`I like to drink water`);
+
+const drink = age >=18 ? 'wine' : 'water';
+console.log(drink);
+
+let drink2;
+
+if(age >=18) {
+  drink2 = 'wine';
+} else {
+  drink2 = 'water';
+}
+
+console.log(drink2);
+
+console.log(`I like to drink ${age >=18 ? 'wine' : 'water'}`);
+
+// Assignment ternary operator
+
+let population = 50;
+let country = 'Canada'
+let message = population > 33 ? console.log(`${country}'s population is above average`) : console.log(`${country}'s population is below average`);
+*/
+/*
+
+//Coding challenge 29
+
+let bill = 275;
+
+let tip = (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
+
+console.log(`The bill was ${bill}, the tip was ${tip.toFixed(2)}, and the total value ${bill + tip}`);
+*/

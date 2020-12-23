@@ -288,3 +288,365 @@ const indexChina = neighbours.indexOf("China");
 neighbours[indexChina] = "India";
 console.log(neighbours);
 */
+
+/*
+// Coding challenge2 41
+
+let tipCalc = function(bill) {
+  return (bill > 50 && bill < 300) ? bill * 0.15 : bill * 0.2; 
+}
+
+const bills = [125,555,44];
+const tips = [];
+const total = [];
+
+bills.forEach(bill =>  {
+  const tip = tipCalc(bill);
+  tips.push(tip);
+  total.push(tip + bill);
+});
+
+console.log(bills);
+console.log(tips);
+console.log(total);
+
+*/
+
+/*
+// Introduction to objects 42
+
+const andrey = {
+  firstName: 'Andrey',
+  lastName: 'Lyamkin',
+  age: 2020 - 1985,
+  job: 'programmer',
+  friends: ['Tom','Jim','John']
+}
+
+//Assignment objects
+
+const myCountry = {
+  country: 'Canada',
+  capital: 'Ottawa',
+  language: 'English',
+  population: 50,
+  neighbours: ['USA']
+}
+
+*/
+
+// Dot vs bracket notation 43
+/*
+const andrey = {
+  firstName: 'Andrey',
+  lastName: 'Lyamkin',
+  age: 2020 - 1985,
+  job: 'programmer',
+  friends: ['Tom','Jim','John']
+}
+
+console.log(andrey);
+console.log(andrey.lastName);
+console.log(andrey['age']);
+
+const nameKey = 'Name';
+console.log(andrey['first' + nameKey]);
+console.log(andrey['last' + nameKey]);
+
+const interestedIn = prompt('What do you want to know about Andrey? Choose between firstName, lastName, age, job and friends');
+
+if(andrey[interestedIn]) {
+  console.log(andrey[interestedIn]);
+} else {
+  console.log('Wrong request! Choose between firstName, lastName, age, job and friends');
+}
+
+andrey.location = 'Canada';
+andrey['email'] = 'test@gmail.com';
+
+console.log(andrey);
+
+// Challenge
+
+console.log(`${andrey.firstName} has ${andrey.friends.length}, and his best friend is called ${andrey.friends[0]} `)
+
+
+
+// Assignment Dot vs bracket notation
+
+const myCountry = {
+  country: 'Canada',
+  capital: 'Ottawa',
+  language: 'English',
+  population: 50,
+  neighbours: ['USA']
+}
+
+console.log(`${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`);
+
+myCountry.population += 2;
+
+console.log(`${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`);
+
+myCountry['population'] += 2;
+
+console.log(`${myCountry.country} has ${myCountry.population} million ${myCountry.language}-speaking people, ${myCountry.neighbours.length} neighbouring countries and a capital called ${myCountry.capital}.`);
+
+*/
+
+/*
+// Object methods 44
+
+const andrey = {
+  firstName: "Andrey",
+  lastName: "Lyamkin",
+  birthYear: 1985,
+  job: "programmer",
+  friends: ["Tom", "Jim", "John"],
+  hasDriversLicense: true,
+
+  // calcAge: function(birthYear) {
+  //   return 2020 - birthYear;
+  // }
+
+  // calcAge: function () {
+  //   console.log(this);
+  //   return 2020 - this.birthYear;
+  // },
+
+  calcAge: function () {
+
+    this.age = 2020 - this.birthYear;
+    return this.age;
+  },
+
+  getSummary: function() {
+    return `${this.firstName} is a ${this.calcAge()}-year old ${this.job} and he has ${this.hasDriversLicense ? 'a' : 'no'} driver's license`;
+  }
+};
+
+console.log(andrey.calcAge());
+console.log(andrey.age);
+// console.log(andrey['calcAge']());
+
+
+// Challenge
+console.log(andrey.getSummary());
+
+
+// Assignment object methods
+
+const myCountry = {
+  country: 'Canada',
+  capital: 'Ottawa',
+  language: 'English',
+  population: 50,
+  neighbours: ['USA'],
+
+  checkIsland: function() {
+    this.isIsland  = this.neighbours.length > 0 ? false : true
+  },
+
+  describe: function() {
+    return `${this.country} has ${this.population} million ${this.language}-speaking people, ${this.neighbours.length} neighbouring countries and a capital called ${this.capital}.`
+  },
+}
+
+console.log(myCountry.describe());
+myCountry.checkIsland();
+console.log(myCountry.isIsland);
+
+*/
+
+/*
+// Coding challenge3 45
+
+const markObj = {
+  fullName: 'Mark Miller',
+  mass: 78,
+  height: 1.69,
+
+  calcBmi: function() {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
+  }
+}
+const johnObj = {
+  fullName: 'John Smith',
+  mass: 92,
+  height: 1.95,
+
+  calcBmi: function() {
+    this.bmi = this.mass / this.height ** 2;
+    return this.bmi;
+  }
+}
+
+if(markObj.calcBmi() > johnObj.calcBmi()) {
+  console.log(`${markObj.fullName} BMI (${markObj.bmi}) is higher than ${johnObj.fullName} (${johnObj.bmi})`);
+} else if(markObj.bmi < johnObj.bmi) {
+  console.log(`${markObj.fullName} BMI (${markObj.bmi}) is lower than ${johnObj.fullName} (${johnObj.bmi})`);
+} else {
+  console.log(`${markObj.fullName} BMI (${markObj.bmi}) is equals ${johnObj.fullName} (${johnObj.bmi})`);
+}
+*/
+
+/*
+// Iteration: The for Loop 46
+
+for(let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weight repetition ${rep}`);
+}
+
+// Assignment the for loop 
+for(let i = 1; i <= 50; i++) {
+  console.log(`Voter number ${i} is currently voting`);
+}
+*/
+
+/*
+// Looping Arrays, Breaking and Continue 47
+
+const andrey = ['Andrey', 'Lyamkin', 2020 - 1985,'programmer', ['Tom', 'Bill','Jake'], true];
+
+const types =[];
+for(let i = 0; i< andrey.length; i++) {
+  console.log(andrey[i], typeof andrey[i]);
+
+  // types[i] = typeof andrey[i];
+  types.push(typeof andrey[i]);
+}
+
+console.log(types);
+
+const years = [1991,2007,1969,2020];
+const ages = [];
+
+for(let i =0; i < years.length; i++) {
+  ages.push(2020 - years[i]);
+}
+console.log(ages);
+
+// continue
+for(let i = 0; i< andrey.length; i++) {
+
+  if(typeof andrey[i] !== 'string') continue;
+  console.log(andrey[i]);
+}
+
+// break
+for(let i = 0; i< andrey.length; i++) {
+
+  if(typeof andrey[i] === 'number') break;
+  console.log(andrey[i]);
+}
+
+
+// Assignment Looping Arrays, Breaking and Continue
+
+function percentageOfWorld1(population) {
+  return (population / 7900) * 100;
+}
+
+const populations = [50, 150, 300, 6];
+const percentages2 = [];
+populations.forEach(population => {
+  percentages2.push(percentageOfWorld1(population));
+})
+
+console.log(percentages2);
+
+*/
+
+// Looping backwards and Loops in Loop 48
+/*
+const andrey = ['Andrey', 'Lyamkin', 2020 - 1985,'programmer', ['Tom', 'Bill','Jake'], true];
+
+for(let i = andrey.length; i >= 0; i-- ) {
+  console.log(andrey[i]);
+}
+
+for(let exercise = 1; exercise <= 3; exercise++) {
+  console.log(`------------ Starting exercise ${exercise}`);
+  for(let rep = 1; rep < 6; rep++) {
+    console.log(`Exercise ${exercise}: Lifting weight repetition ${rep}`);
+  }
+}
+
+
+
+// Assignment backwards looping
+
+const listOfNeighbours = [['Canada', 'Mexico'], ['Spain'], ['Norway', 'Sweden',
+'Russia']];
+
+for(let i = 0; i < listOfNeighbours.length; i++) {
+  for(let j = 0; j< listOfNeighbours[i].length; j++) {
+    console.log(`Neighbour: ${listOfNeighbours[i][j]}`);
+  }
+}
+*/
+
+/*
+// The while loop 49
+
+let rep = 1;
+while(rep <=10) {
+  console.log(`Lifting weight repetition ${rep}`);
+  rep++;
+}
+
+let dice = Math.trunc(Math.random() * 6) + 1;
+
+while(dice !=6) {
+  console.log(`You rolled a ${dice}`);
+  dice = Math.trunc(Math.random() * 6) + 1;
+  if(dice ===6) console.log(`Loop is about to end...`);
+}
+
+
+// Assignment while loop
+
+function percentageOfWorld1(population) {
+  return (population / 7900) * 100;
+}
+
+const populations = [50, 150, 300, 6];
+const percentages2 = [];
+
+let index = 0;
+while(index < populations.length) {
+  percentages2.push(percentageOfWorld1(populations[index]));
+  index++;
+}
+
+console.log(percentages2);
+
+*/
+
+/*
+// Coding Challenge4 50
+
+let tipCalc = function(bill) {
+  return (bill > 50 && bill < 300) ? bill * 0.15 : bill * 0.2; 
+}
+let calcAverage = function(arr) {
+  let sum = arr.reduce((acc, num) => acc+num,0);
+  return sum / arr.length; 
+}
+
+const bills = [22,295,176,440,37,105,10,1100,86,52];
+const tips = [];
+const total = [];
+
+bills.forEach(bill =>  {
+  const tip = tipCalc(bill);
+  tips.push(tip);
+  total.push(tip + bill);
+});
+
+console.log(bills);
+console.log(tips);
+console.log(total);
+console.log(calcAverage(total));
+*/

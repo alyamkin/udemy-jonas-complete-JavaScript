@@ -53,6 +53,108 @@ const restaurant = {
   openingHours,
 };
 
+// RECAP 112 -123
+// Optional Chaining and objects
+const wDays = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
+const hours = {
+  mon: {
+    open: 7,
+    close: 23,
+  },
+  wed: {
+    open: 7,
+    close: 23,
+  },
+  thu: {
+    open: 7,
+    close: 23,
+  },
+  sat: {
+    open: 10,
+    close: 22,
+  },
+
+  displayOpenDays() {
+    console.log(`Monday, Wednsday, Thursday, Saturday`);
+  },
+};
+/*
+console.log(hours.sun?.open);
+
+for (const wDay of wDays) {
+  hours?.[wDay] && console.log(hours[wDay].open);
+}
+
+// Optional Chaining and arrays
+const personArr = [{ name: 'Andrey' }];
+console.log(personArr[1]?.name ?? 'Element is not exist');
+
+// Optional Chaining and methods
+hours.displayOpenDays?.() || console.log('Method is not exist');
+
+
+// Looping objects
+for (const [day, opens] of Object.entries(hours)) {
+  console.log(Object.entries(hours));
+}
+
+
+// set
+const namesArr = ['Andrey', 'Andrey', 'Yana', 'Andrey'];
+const namesSet = new Set(namesArr);
+namesSet.add('Yana');
+namesSet.add('Tom');
+namesSet.delete('Yana');
+console.log(namesSet);
+console.log(namesSet.has('tom'));
+console.log(namesSet.size);
+console.log([...new Set('Andreyyy')]);
+
+
+// Map
+const mapExample = new Map();
+mapExample.set('name', 'Andrey');
+mapExample.set(false, 'has no job');
+mapExample.set(1, 'has bank account');
+console.log(mapExample);
+mapExample.delete(false);
+console.log(mapExample);
+console.log(mapExample.has(1));
+
+const mapExample2 = new Map([
+  ['firstName', 'Andrey'],
+  [
+    'age',
+    function () {
+      console.log('Hello');
+    },
+  ],
+]);
+
+let getAge = mapExample2.get('age');
+
+console.log(mapExample2);
+
+for (const [key, value] of mapExample2) {
+  if (typeof value === 'function') value();
+}
+
+const mapToArr = [...mapExample2.values()];
+console.log(mapToArr[1]());
+
+
+// strings
+const arr = ['My', 'name', 'is', 'Andrey'];
+const str = '    My name is Andrey';
+console.log(str[0]);
+console.log(str.split(' '));
+console.log(str.toUpperCase());
+console.log(str.toLowerCase());
+console.log(str.replace(/e/g, 'E'));
+console.log(arr.join(' '));
+console.log(str.trimLeft());
+console.log(str.trim().padStart(30, '*'));
+*/
 /*
 // RECAP 103-110
 //destructuring arrays

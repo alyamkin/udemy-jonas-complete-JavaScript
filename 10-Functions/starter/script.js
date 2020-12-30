@@ -1,1 +1,164 @@
 'use strict';
+
+/*
+// Default Parameters 126
+const bookings = [];
+const createBooking = function (
+  flightNum,
+  numPassengers = 1,
+  price = 199 * numPassengers
+) {
+  //   numPassengers = numPassengers ?? 1;
+  //   price = price ?? 199;
+  const booking = {
+    flightNum,
+    numPassengers,
+    price,
+  };
+  console.log(booking);
+  bookings.push(booking);
+};
+
+createBooking('LH124', 2, 800);
+createBooking('LH124', 1);
+createBooking('LH124', 2);
+createBooking('LH124', undefined, 500);
+*/
+
+/*
+// How Passing Arguments Works: Value vs. Reference 127
+
+const flight = 'LH234';
+const andrey = {
+  name: 'Andrey Lyamkin',
+  passport: 23234355,
+};
+
+const checkIn = function (flightNum, passenger) {
+  flightNum = 'LH999';
+  passenger.name = 'Mr. ' + passenger.name;
+  if (passenger.passport === 23234355) {
+    alert('Cheked in');
+  } else {
+    alert('Wrong passport');
+  }
+};
+
+console.log(flight);
+console.log(andrey);
+
+const newPassport = function (person) {
+  person.passport = Math.trunc(Math.random() * 1000);
+};
+
+newPassport(andrey);
+checkIn(flight, andrey);
+*/
+
+/*
+// First-Class and Higher-Order Functions 128
+//  Functions Accepting Callback Functions 129
+
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+};
+
+const upperFirstWord = function (str) {
+  const [first, ...rest] = str.split(' ');
+  return [first.toUpperCase(), ...rest].join(' ');
+};
+
+// High order function
+const transformer = function (str, fn) {
+  console.log(str);
+  console.log(`Transformed string: ${fn(str)}`);
+  console.log(`Transformed by: ${fn.name}`);
+};
+
+transformer('Javascript is the best!', upperFirstWord);
+transformer('Javascript is the best!', oneWord);
+
+const high5 = function () {
+  console.log('🖐');
+};
+
+document.body.addEventListener('click', high5);
+
+['Andrey', 'Tom'].forEach(high5);
+
+
+// Practice
+const calcSum = function (...numbers) {
+  return numbers.reduce((sum, num) => sum + num, 0);
+};
+const calculations = function (fn, ...numbers) {
+  console.log(`The average is: ${fn(...numbers) / numbers.length}`);
+};
+
+const numbers = [1, 2, 3, 4, 5];
+calculations(calcSum, ...numbers);
+*/
+
+/*
+// Functions Returning Functions 130
+
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+const greet2 = greeting => name => console.log(`${greeting} ${name}`);
+
+const greeterHey = greet('Hey');
+greeterHey('Andrey');
+
+greet('Hello')('Bob');
+
+greet2('Hola!')('Tom');
+*/
+
+/*
+// The call and apply Methods 131
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNumber, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNumber}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${flightNumber}`,
+      name: `${name}`,
+    });
+  },
+};
+
+// Call
+lufthansa.book(239, 'Andrey Lyamkin');
+lufthansa.book(565, 'John Smith');
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+book.call(eurowings, 23, 'Sara Smith');
+book.call(lufthansa, 239, 'Yana Love');
+
+console.log(eurowings.bookings);
+console.log(lufthansa.bookings);
+
+// Apply
+
+const fligthData = [583, 'Vladimir Dostoevskiy'];
+book.apply(eurowings, fligthData);
+book.call(lufthansa, ...fligthData);
+console.log(eurowings.bookings);
+console.log(lufthansa.bookings);
+*/
+// The bind Method

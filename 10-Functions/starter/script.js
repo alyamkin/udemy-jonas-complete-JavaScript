@@ -140,8 +140,8 @@ lufthansa.book(239, 'Andrey Lyamkin');
 lufthansa.book(565, 'John Smith');
 
 const eurowings = {
-  airline: 'Eurowings',
-  iataCode: 'EW',
+    airline: 'Eurowings',
+    iataCode: 'EW',
   bookings: [],
 };
 
@@ -162,3 +162,68 @@ console.log(eurowings.bookings);
 console.log(lufthansa.bookings);
 */
 // The bind Method
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNumber, name) {
+    console.log(
+      `${name} booked a seat on ${this.airline} flight ${this.iataCode}${flightNumber}`
+    );
+    this.bookings.push({
+      flight: `${this.iataCode}${flightNumber}`,
+      name: `${name}`,
+    });
+  },
+};
+
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+/*
+const book = lufthansa.book;
+const lhBookings = lufthansa.bookings;
+const euBookings = eurowings.bookings;
+// book.call(lufthansa, ...['333', 'Andrey Lyamkin']);
+// book.call(eurowings, ...['335', 'Andrey Lyamkin']);
+
+const bookEW = book.bind(eurowings);
+const bookLH = book.bind(lufthansa);
+
+const bookEW23 = book.bind(eurowings, 23);
+bookEW23('Steven Williams');
+bookEW23('Andrey Lyamkin');
+
+console.log(lhBookings);
+console.log(euBookings);
+*/
+
+// with Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  //   console.log(this);
+  this.planes++;
+  console.log(this.planes);
+};
+
+document
+  .querySelector('.buy')
+  .addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 200));
+
+const addVAT = addTax.bind(null, 0.23);
+console.log(addVAT(100));
+
+// Challenge
+
+const addTaxGeneric = rate => value => value + value * rate;
+
+const addGST = addTaxGeneric(0.18);
+console.log(addGST(100));

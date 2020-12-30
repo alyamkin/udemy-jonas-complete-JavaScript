@@ -163,6 +163,7 @@ console.log(lufthansa.bookings);
 */
 // The bind Method
 
+/*
 const lufthansa = {
   airline: 'Lufthansa',
   iataCode: 'LH',
@@ -183,7 +184,7 @@ const eurowings = {
   iataCode: 'EW',
   bookings: [],
 };
-/*
+
 const book = lufthansa.book;
 const lhBookings = lufthansa.bookings;
 const euBookings = eurowings.bookings;
@@ -199,7 +200,7 @@ bookEW23('Andrey Lyamkin');
 
 console.log(lhBookings);
 console.log(euBookings);
-*/
+
 
 // with Event Listeners
 lufthansa.planes = 300;
@@ -227,6 +228,7 @@ const addTaxGeneric = rate => value => value + value * rate;
 
 const addGST = addTaxGeneric(0.18);
 console.log(addGST(100));
+*/
 /*
 // Coding Challenge #1 133
 
@@ -269,3 +271,96 @@ document
 // poll.displayResults.bind(null, '1,2,3')();
 poll.displayResults.call({ answers: [5, 2, 3] }, 'string');
 */
+
+/*
+// Immediately Invoked Function Expressions (IIFE) 134
+
+const runOnce = function () {
+  console.log('This will never run again');
+};
+
+runOnce();
+
+// IIFE
+(function () {
+  console.log('This will never run again');
+  const isPrivate = 23;
+})();
+
+// console.log(isPrivate);
+(() => console.log('This will never run again'))();
+
+{
+  const isPrivate = 23;
+  var notPrivate = 46;
+}
+
+console.log(notPrivate);
+*/
+
+/*
+// Closures 135
+
+const secureBooking = function () {
+  let passengerCount = 0;
+
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  };
+};
+const booker = secureBooking();
+booker();
+booker();
+booker();
+console.dir(booker);
+*/
+
+/*
+// More Closure Examples 136
+
+// Example 1
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  };
+};
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  };
+};
+g();
+f();
+console.dir(f);
+h();
+f();
+console.dir(f);
+
+// Example 2
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000);
+  console.log(`will start boarding in ${wait} seconds`);
+};
+
+const perGroup = 1000;
+boardPassengers(180, 3);
+*/
+
+// Coding Challenge #2 137
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.body.addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();

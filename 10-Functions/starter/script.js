@@ -1,5 +1,131 @@
 'use strict';
+/*
+// recap 126 - 136
 
+// Default parameters
+const calcScientistsPerc = function (scientNum, population = 50) {
+  return (scientNum / (population * 1000000)) * 100;
+};
+
+console.log(
+  `There are ${calcScientistsPerc(10000)}% of scientists from Canada population`
+);
+
+// Value vs. Reference
+const personObj = {
+  firstName: 'Andrey',
+  insuranceNum: 1254698,
+};
+
+const firstName = 'Andrey Lyamkin';
+
+const testFunction = function (person, firstName) {
+  person.insuranceNum = 22222;
+  firstName = 'Tom Reddle';
+};
+
+console.log(personObj, firstName);
+testFunction(personObj, firstName);
+console.log(personObj, firstName);
+
+//
+const firstName = 'Andrey Lyamkin';
+const upperCase = function (str) {
+  return str.toUpperCase();
+};
+
+const lowerCase = function (str) {
+  return str.toLowerCase();
+};
+
+const transformString = function (str, fn) {
+  return fn(str);
+};
+console.log(transformString(firstName, upperCase));
+console.log(transformString(firstName, lowerCase));
+
+// Returning function
+
+const greet = function (greet) {
+  return function (name) {
+    return `${greet} ${name}`;
+  };
+};
+
+const greeting = greet('Good morning');
+console.log(greeting('Andrey Lyamkin'));
+
+
+
+// Call, Apply, Bind
+
+const personAndrey = {
+  firstName: 'Andrey',
+  bitrhYear: 1985,
+
+  calcAge(currYear) {
+    this.age = currYear - this.bitrhYear;
+  },
+};
+
+const personTom = {
+  firstName: 'Tom',
+  bitrhYear: 2000,
+};
+
+const calcAge = personAndrey.calcAge;
+const calcAgeAndrey = calcAge.bind(personAndrey);
+console.log(calcAgeAndrey(2000));
+console.log(personAndrey);
+
+
+// scolures
+function greet(greetMessage) {
+  return function (name) {
+    console.log(`${greetMessage} ${name}`);
+  };
+}
+
+const greeting = greet('Hello');
+greeting('Andrey');
+
+(function () {
+  const h1Elem = document.querySelector('h1');
+  h1Elem.style.cssText = 'color: green';
+  document.body.addEventListener('click', function () {
+    h1Elem.style.cssText = 'color: red';
+  });
+})();
+
+
+let f = 0;
+
+const multiplicationByTen = function () {
+  const x = 10;
+  f = function (y) {
+    return x * y;
+  };
+};
+
+multiplicationByTen();
+console.log(f(10));
+
+
+// map
+const testMap = new Map();
+testMap.set('name', 'Andrey').set('age', 35);
+console.log(testMap);
+console.log(testMap.has('age'));
+
+const testMap2 = new Map([
+  ['firstName', 'Andrey'],
+  ['lastName', 'Lyamkin'],
+]);
+
+console.log(testMap2);
+const andreyArr = [...testMap2];
+console.log(andreyArr);
+*/
 /*
 // Default Parameters 126
 const bookings = [];
@@ -355,6 +481,7 @@ const perGroup = 1000;
 boardPassengers(180, 3);
 */
 
+/*
 // Coding Challenge #2 137
 (function () {
   const header = document.querySelector('h1');
@@ -364,3 +491,4 @@ boardPassengers(180, 3);
     header.style.color = 'blue';
   });
 })();
+*/

@@ -61,16 +61,168 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
+const displayMovements = function (movements) {
+  containerMovements.innerHTML = '';
+  movements.forEach(function (mov, i) {
+    const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const html = `
+    <div class="movements__row">
+      <div class="movements__type movements__type--${type}">${
+      i + 1
+    } ${type}</div>
+      <div class="movements__date">3 days ago</div>
+      <div class="movements__value">${mov}€</div>
+    </div>
+    `;
+    containerMovements.insertAdjacentHTML('afterbegin', html);
+  });
+};
+
+displayMovements(account1.movements);
+
+const createUserName = function (accs) {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(' ')
+      .map(name => name.slice(0, 1))
+      .join('');
+  });
+};
+
+createUserName(accounts);
+console.log(account1);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
 
+// const currencies = new Map([
+//   ['USD', 'United States dollar'],
+//   ['EUR', 'Euro'],
+//   ['GBP', 'Pound sterling'],
+// ]);
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+/////////////////////////////////////////////////
+// Simple Array Methods 140
+/*
+// slice - extract without mutation original array
+let arr = ['a', 'b', 'c', 'd', 'e'];
+console.log(arr.slice(2));
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+console.log(arr.slice(1, -2));
+console.log(arr.slice());
+
+// splice - mutate original array
+// console.log(arr.splice(2));
+arr.splice(-1);
+arr.splice(1, 1);
+console.log(arr);
+
+// reverse - mutate original array
+arr = ['a', 'b', 'c', 'd', 'e'];
+let arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+console.log(arr);
+
+// concat - doen't mutate
+const letters = arr.concat(arr2);
+console.log(letters);
+
+// join
+console.log(letters.join(' - '));
+*/
+
+/*
+// Looping Arrays: forEach 141
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+// for (const movement of movements) {
+for (const [index, movement] of movements.entries()) {
+  if (movement > 0) {
+    console.log(`Movement ${index + 1}: You deposited ${movement}`);
+  } else {
+    console.log(`Movement ${index + 1}: You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+movements.forEach(function (mov, i, arr) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+*/
+
+/*
+// forEach With Maps and Sets 142
+// Map forEach
 const currencies = new Map([
   ['USD', 'United States dollar'],
   ['EUR', 'Euro'],
   ['GBP', 'Pound sterling'],
 ]);
 
-const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+});
 
-/////////////////////////////////////////////////
+const currenciesUnique = new Set(['USD', 'GBR', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (index, value) {
+  console.log(`index ${index} value ${value}`);
+});
+*/
+
+/*
+// Coding Challenge #1 143
+const dogsJulia = [3, 5, 2, 12, 7];
+const dogsKate = [4, 1, 15, 8, 3];
+
+const checkDogs = function (dogsList1, dogsList2) {
+  const dogsJuliaList = [...dogsList1];
+  const dogsKateList = [...dogsList2];
+  const dogsListCombined = [...dogsJuliaList.slice(1, -2), ...dogsKateList];
+
+  dogsListCombined.forEach(function (ageDog, index) {
+    if (ageDog >= 3) {
+      console.log(
+        `Dog number ${index + 1} is an adult, and is ${ageDog} years old`
+      );
+    } else {
+      console.log(`Dog number ${index + 1} is still a puppy 🐶`);
+    }
+  });
+};
+
+checkDogs(dogsJulia, dogsKate);
+*/
+
+// Data Transformations: map, filter, reduce 144
+
+// The map Method 145
+/*
+const eurToUsd = 1.1;
+
+const movementsUSD = movements.map(mov => mov * eurToUsd);
+console.log(movements);
+console.log(movementsUSD);
+
+const movementsUSD2 = [];
+for (const mov of movements) {
+  movementsUSD2.push(mov * eurToUsd);
+}
+
+const movementsDescriptions = movements.map(
+  (mov, i) =>
+    `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(
+      mov
+    )}`
+);
+
+console.log(movementsDescriptions);
+*/

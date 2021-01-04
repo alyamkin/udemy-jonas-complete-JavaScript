@@ -61,9 +61,10 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements) {
+const displayMovements = function (movements, sort = false) {
   containerMovements.innerHTML = '';
-  movements.forEach(function (mov, i) {
+  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
     const html = `
     <div class="movements__row">
@@ -168,6 +169,17 @@ btnTransfer.addEventListener('click', function (event) {
     updateUI(currentAccount);
   }
 });
+btnLoan.addEventListener('click', function (event) {
+  event.preventDefault();
+  const amount = Number(inputLoanAmount.value);
+  if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
+    // Add movement
+    currentAccount.movements.push(amount);
+    // Update UI
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = '';
+});
 btnClose.addEventListener('click', function (event) {
   event.preventDefault();
   const username = inputCloseUsername.value;
@@ -183,6 +195,13 @@ btnClose.addEventListener('click', function (event) {
     containerApp.style.cssText = 'opacity:0';
   }
   inputCloseUsername.value = inputClosePin.value = '';
+});
+
+let sorted = false;
+btnSort.addEventListener('click', function (event) {
+  event.preventDefault();
+  displayMovements(currentAccount.movements, !sorted);
+  sorted = !sorted;
 });
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
@@ -423,3 +442,181 @@ console.log(findAccount(accounts));
 // Implementing Login 155
 // Implementing Transfers 156
 // The findIndex Method 157
+
+/*
+// some and every 158
+// SOME
+console.log(movements);
+console.log(movements.includes(-130)); // check equality
+console.log(movements.some(mov => mov === -130));
+const anyDeposits = movements.some(mov => mov > 1500); // specify the comdition
+console.log(anyDeposits);
+
+
+// EVERY
+console.log(account4.movements.every(mov => mov > 0));
+
+// Separate callback
+const deposit = mov => mov > 0;
+console.log(movements.some(deposit));
+*/
+
+/*
+// flat and flatMap 159
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+console.log(arr.flat());
+const arrDeep = [[[1, 2], 3], [4, [5, 6]], 7, 8];
+console.log(arrDeep.flat(2));
+
+// flat
+const overalBalance = accounts
+  .map(acc => acc.movements)
+  .flat()
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance);
+// flatMap - only 1 level deep
+const overalBalance2 = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((acc, mov) => acc + mov, 0);
+console.log(overalBalance2);
+
+const newArr = [];
+arr.forEach(elem => {
+  if (!(typeof elem === 'number')) {
+    newArr.push(...elem);
+  } else {
+    newArr.push(elem);
+  }
+});
+
+console.log(newArr);
+*/
+
+/*
+// Sorting Arrays 160 - mutate array
+//String
+const owners = ['Jonas', 'Zach', 'Adam', 'Martha'];
+console.log(owners.sort());
+console.log(owners);
+
+// Numbers - conver numbers to string before sort
+console.log(movements);
+
+// ascending
+// movements.sort((a, b) => {
+//   if (a > b) return 1;
+//   if (a < b) return -1;
+// });
+movements.sort((a, b) => a - b);
+console.log(movements);
+// descending
+// movements.sort((a, b) => {
+//   if (a > b) return -1;
+//   if (a < b) return 1;
+// });
+movements.sort((a, b) => b - a);
+console.log(movements);
+*/
+/*
+// More Ways of Creating and Filling Arrays 161
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const x = new Array(7);
+console.log(x);
+
+// x.fill(1);
+x.fill(1, 3, 5);
+console.log(x);
+arr.fill(23, 3, 6);
+console.log(arr);
+
+// Array.from
+const y = Array.from({ length: 7 }, () => 1);
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1);
+console.log(z);
+
+// Assignment
+const randomDice = Array.from(
+  { length: 100 },
+  () => Math.trunc(Math.random() * 6) + 1
+);
+
+console.log(randomDice);
+
+
+labelBalance.addEventListener('click', function () {
+  const movementsUI = Array.from(
+    document.querySelectorAll('.movements__value'),
+    el => Number(el.textContent.replace('€', ''))
+  );
+  console.log(movementsUI);
+
+  const movementsUI2 = [...document.querySelectorAll('.movements__value')];
+  console.log(movementsUI2);
+});
+
+*/
+
+/*
+// Coding Challenge #4 163
+const dogs = [
+  { weight: 22, curFood: 250, owners: ['Alice', 'Bob'] },
+  { weight: 8, curFood: 200, owners: ['Matilda'] },
+  { weight: 13, curFood: 275, owners: ['Sarah', 'John'] },
+  { weight: 32, curFood: 340, owners: ['Michael'] },
+];
+
+// 1.
+dogs.forEach(dog => (dog.recommendedFood = dog.weight ** 0.75 * 28));
+// 2.
+const sarahDog = dogs.find(dog => dog.owners.some(owner => owner === 'Sarah'));
+const currentFood = sarahDog.curFood;
+const recommFood = sarahDog.recommendedFood;
+const takesFood =
+  currentFood >= recommFood * 0.9 && currentFood <= recommFood * 1.1
+    ? 'normal'
+    : currentFood > recommFood * 1.1
+    ? 'too much'
+    : 'too low';
+console.log(`Sarah's dog is eating ${takesFood}`);
+
+// 3.
+const ownersEatTooMuch = dogs
+  .filter(dog => dog.curFood > dog.recommendedFood)
+  .map(dog => dog.owners)
+  .flat();
+const ownersEatTooLittle = dogs
+  .filter(dog => dog.curFood < dog.recommendedFood)
+  .map(dog => dog.owners)
+  .flat();
+
+// 4.
+console.log(`${ownersEatTooMuch.join(' and ')}'s dogs eat too much!`);
+console.log(`${ownersEatTooLittle.join(' and ')}'s dogs eat too little!`);
+
+// 5.
+console.log(dogs.some(dog => dog.curFood === dog.recommendedFood));
+
+// 6.
+
+let checkRecommendedBetween = function () {
+  return (
+    this.curFood >= this.recommendedFood * 0.9 &&
+    this.curFood <= this.recommendedFood * 1.1
+  );
+};
+
+console.log(dogs.some(dog => checkRecommendedBetween.call(dog)));
+// 7.
+
+const dogsEatOk = Array.from(
+  dogs.filter(dog => checkRecommendedBetween.call(dog))
+);
+
+// 8.
+const dogsSortedReccomendedAsc = Array.from(
+  dogs.sort((a, b) => a.recommendedFood - b.recommendedFood)
+);
+console.log(dogsSortedReccomendedAsc);
+*/

@@ -78,17 +78,25 @@ const inputLoanAmount = document.querySelector('.form__input--loan-amount');
 const inputCloseUsername = document.querySelector('.form__input--user');
 const inputClosePin = document.querySelector('.form__input--pin');
 
-const displayMovements = function (movements, sort = false) {
+const displayMovements = function (acc, sort = false) {
   containerMovements.innerHTML = '';
-  const movs = sort ? movements.slice().sort((a, b) => a - b) : movements;
+  const movs = sort
+    ? acc.movements.slice().sort((a, b) => a - b)
+    : acc.movements;
   movs.forEach(function (mov, i) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
+    const date = new Date(acc.movementsDates[i]);
+    const day = `${date.getDate()}`.padStart(2, 0);
+    const month = `${date.getMonth() + 1}`.padStart(2, 0);
+    const year = date.getFullYear();
+    const displayDate = `${day}/${month}/${year}`;
+
     const html = `
     <div class="movements__row">
       <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
-      <div class="movements__date">3 days ago</div>
+      <div class="movements__date">${displayDate} days ago</div>
       <div class="movements__value">${mov.toFixed(2)}€</div>
     </div>
     `;
@@ -99,6 +107,9 @@ const displayMovements = function (movements, sort = false) {
 const calcDisplayBalance = function (acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
   labelBalance.textContent = `${acc.balance.toFixed(2)} €`;
+
+  // const currDate = new Date();
+  // labelDate.textContent = `${currDate.getDate()}`;
 };
 
 const calcDisplaySummary = function (acc) {
@@ -134,7 +145,7 @@ createUserName(accounts);
 
 const updateUI = function (acc) {
   // Display movements
-  displayMovements(acc.movements);
+  displayMovements(acc);
   // Display Balance
   calcDisplayBalance(acc);
   // Display summary
@@ -142,6 +153,14 @@ const updateUI = function (acc) {
 };
 // Event handlers
 let currentAccount;
+
+// FAKE ALWAYS LOGGED IN
+currentAccount = account1;
+updateUI(currentAccount);
+containerApp.style.cssText = 'opacity:1';
+
+// day/month/year
+
 btnLogin.addEventListener('click', function (event) {
   // Prevent form from submitting
   event.preventDefault();
@@ -155,6 +174,16 @@ btnLogin.addEventListener('click', function (event) {
       currentAccount.owner.split(' ')[0]
     }`;
     containerApp.style.cssText = 'opacity:1';
+
+    // Create current date and time
+    const now = new Date();
+    const day = `${now.getDate()}`.padStart(2, 0);
+    const month = `${now.getMonth() + 1}`.padStart(2, 0);
+    const year = now.getFullYear();
+    const hour = `${now.getHours()}`.padStart(2, 0);
+    const min = `${now.getMinutes()}`.padStart(2, 0);
+
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
 
     // Clear input fields
     inputLoginPin.value = inputLoginUsername.value = '';
@@ -182,6 +211,10 @@ btnTransfer.addEventListener('click', function (event) {
     currentAccount.movements.push(-amount);
     receiverAcc.movements.push(amount);
 
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+    receiverAcc.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -192,6 +225,10 @@ btnLoan.addEventListener('click', function (event) {
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
     // Add movement
     currentAccount.movements.push(amount);
+
+    // Add transfer date
+    currentAccount.movementsDates.push(new Date().toISOString());
+
     // Update UI
     updateUI(currentAccount);
   }
@@ -217,7 +254,7 @@ btnClose.addEventListener('click', function (event) {
 let sorted = false;
 btnSort.addEventListener('click', function (event) {
   event.preventDefault();
-  displayMovements(currentAccount.movements, !sorted);
+  displayMovements(currentAccount, !sorted);
   sorted = !sorted;
 });
 
@@ -283,5 +320,99 @@ console.log((2.6).toFixed(0));
 console.log((2.6).toFixed(1));
 console.log(+(2.6).toFixed(2));
 */
-
+/*
 // The Remainder Operator 168
+console.log(5 % 2); //5 = 2 * 2 + 1
+console.log(5 / 2); //5 = 2 * 2 + 1
+console.log(8 % 3); //8 = 2 * 3 + 2
+console.log(8 / 3); //8 = 2 * 3 + 2
+
+console.log(6 % 2);
+console.log(6 / 2);
+console.log(7 % 2);
+console.log(7 / 2);
+
+const isEven = n => n % 2 === 0;
+console.log(isEven(5));
+
+
+labelWelcome.addEventListener('click', function (event) {
+  event.preventDefault();
+  [...document.querySelectorAll('.movements__row')].forEach((row, i) => {
+    row.style.cssText =
+      i % 2 === 0 ? 'background-color: cyan;' : 'background-color: lightgreen;';
+  });
+});
+*/
+
+/*
+// Working with BigInt 169
+console.log(2 ** 53 - 1);
+console.log(Number.MAX_SAFE_INTEGER);
+console.log(2 ** 53 + 1);
+console.log(2 ** 53 + 2);
+console.log(2 ** 53 + 3);
+console.log(2 ** 53 + 4);
+
+console.log(4546464878978789798445464654564545646546548787876464n);
+console.log(BigInt(454646487897));
+
+// Operations
+console.log(10000n + 10000n);
+console.log(100045454646464421213213213454654640n * 100000000000000n);
+
+const huge = 2054545467987465467743143131354564n;
+const num = 23;
+console.log(huge * BigInt(num));
+
+// Exceptions
+console.log(20n > 10);
+console.log(20n === 20);
+console.log(typeof 20n);
+console.log(20n == 20);
+
+// String concat ex
+console.log(huge + 'is really big!!!');
+// console.log(Math.sqrt(16n));
+
+// Divisions
+
+console.log(10n / 3n); //3n
+console.log(10 / 3); //3.333333
+*/
+
+// Creating Dates 170
+/*
+const now = new Date();
+console.log(now);
+
+console.log(new Date('Wed Jan 06 2021 19:49:46'));
+console.log(new Date('December 24, 2015'));
+
+console.log(new Date(account1.movementsDates[0]));
+
+console.log(new Date(2037, 10, 19, 15, 23, 5));
+console.log(new Date(2037, 10, 31));
+
+console.log(new Date(0));
+console.log(new Date(3 * 24 * 60 * 60 * 1000));
+
+// Working with dates
+const future = new Date(2037, 10, 19, 15, 23);
+console.log(future); // Thu Nov 19 2037 15:23:00 GMT-0500 (Eastern Standard Time)
+console.log(future.getFullYear());
+console.log(future.getMonth());
+console.log(future.getDate());
+console.log(future.getDay());
+console.log(future.getHours());
+console.log(future.getMinutes());
+console.log(future.getSeconds());
+console.log(future.toISOString());
+console.log(future.getTime());
+console.log(Date.now());
+
+future.setFullYear(2040);
+console.log(future);
+*/
+
+// Adding Dates to "Bankist" App 171

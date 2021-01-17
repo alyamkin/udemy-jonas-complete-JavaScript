@@ -174,13 +174,38 @@ const updateUI = function (acc) {
   // Display summary
   calcDisplaySummary(acc);
 };
+
+const startLogOutTimer = function () {
+  const tick = () => {
+    const min = String(Math.trunc(timer / 60)).padStart(2, '0');
+    const sec = String(timer % 60).padStart(2, '0');
+    // In each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+
+    // When 0 seconds, stop timer and log out the user
+    if (timer === 0) {
+      clearInterval(timerInt);
+      labelWelcome.textContent = `Log in to get started`;
+      containerApp.style.cssText = 'opacity:0';
+    }
+    // Decrease 1 second
+    timer--;
+  };
+  // Set time to 5 minuts
+  let timer = 120;
+  // Call the timer every second
+  tick();
+  const timerInt = setInterval(tick, 1000);
+  return timerInt;
+};
+///////////////////////////////////////////////
 // Event handlers
-let currentAccount;
+let currentAccount, timerInt;
 
 // FAKE ALWAYS LOGGED IN
-currentAccount = account1;
-updateUI(currentAccount);
-containerApp.style.cssText = 'opacity:1';
+// currentAccount = account1;
+// updateUI(currentAccount);
+// containerApp.style.cssText = 'opacity:1';
 
 btnLogin.addEventListener('click', function (event) {
   // Prevent form from submitting
@@ -216,6 +241,9 @@ btnLogin.addEventListener('click', function (event) {
     inputLoginPin.value = inputLoginUsername.value = '';
     inputLoginPin.blur();
 
+    // Timer
+    if (timerInt) clearInterval(timerInt);
+    timerInt = startLogOutTimer();
     // Update UI
     updateUI(currentAccount);
   }
@@ -244,20 +272,30 @@ btnTransfer.addEventListener('click', function (event) {
 
     // Update UI
     updateUI(currentAccount);
+
+    // Reset timer
+    clearInterval(timerInt);
+    timerInt = startLogOutTimer();
   }
 });
 btnLoan.addEventListener('click', function (event) {
   event.preventDefault();
   const amount = Math.floor(inputLoanAmount.value);
   if (amount > 0 && currentAccount.movements.some(mov => mov >= amount * 0.1)) {
-    // Add movement
-    currentAccount.movements.push(amount);
+    setTimeout(function () {
+      // Add movement
+      currentAccount.movements.push(amount);
 
-    // Add transfer date
-    currentAccount.movementsDates.push(new Date().toISOString());
+      // Add transfer date
+      currentAccount.movementsDates.push(new Date().toISOString());
 
-    // Update UI
-    updateUI(currentAccount);
+      // Update UI
+      updateUI(currentAccount);
+
+      // Reset timer
+      clearInterval(timerInt);
+      timerInt = startLogOutTimer();
+    }, 2500);
   }
   inputLoanAmount.value = '';
 });
@@ -479,3 +517,31 @@ console.log(
   new Intl.NumberFormat(navigator.language, options).format(num)
 );
 */
+
+/*
+// 175. Timers: setTimeout and setInterval
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout(
+  (ing1, ing2) => console.log(`Here is your pizza with ${ing1} and ${ing2}`),
+  3000,
+  ...ingredients
+);
+
+console.log('Waiting...');
+
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer);
+
+// setInterval
+setInterval(() => {
+  const now = new Date();
+  console.log(`${now.getHours()}:${now.getMinutes()}:${now.getSeconds(0)}`);
+}, 1000);
+*/
+
+// 176. Implementing a Countdown Timer
+
+// let counter = 100;
+
+// setInterval(() => {
+//   console.log(counter--);
+// }, 1000);

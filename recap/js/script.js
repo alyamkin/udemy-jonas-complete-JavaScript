@@ -514,3 +514,41 @@ console.log(usDate);
 
 console.log(navigator);
 */
+
+// 181. Selecting, Creating, and Deleting Elements
+// 182. Styles, Attributes and Classes
+/*
+console.log(document.body);
+console.log(document.documentElement);
+console.log(document.head);
+
+console.log(document.getElementById("paragraph"));
+console.log(document.getElementsByClassName("list"));
+console.log(document.getElementsByTagName("p"));
+
+
+console.log(document.querySelectorAll(".list-item"));
+
+const ul = document.querySelector(".list");
+
+document.querySelector(".btn__style-li").addEventListener("click", function () {
+  document.querySelectorAll(".list li").forEach((elem) => {
+    elem.setAttribute("class", "");
+    elem.classList.add("list-item");
+  });
+});
+
+document
+  .querySelector(".btn__append-li")
+  .addEventListener("click", function () {
+    const listLength = document.querySelectorAll(".list li").length;
+    const li = document.createElement("li");
+    li.textContent = `option ${listLength + 1}`;
+    ul.insertAdjacentElement("beforeend", li);
+  });
+
+document.querySelector(".btn__style-p").addEventListener("click", function () {
+  document.querySelector("#paragraph").classList.toggle("text-red");
+});
+console.log(document.querySelector("#paragraph").dataset.someText);
+*/

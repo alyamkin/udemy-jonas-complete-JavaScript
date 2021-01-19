@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smooth Scroll</title>
+    <style>
+      :root {
+        --color-primary: #5ec576;
+        --color-primary-darker: #4bbb7d;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .btn {
+        outline: none;
+        border: none;
+        background-color: var(--color-primary);
+        padding: 1rem;
+        font-size: 1.5rem;
+        border-radius: 10rem;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: var(--color-primary-darker);
+      }
+      .section {
+        height: 1000px;
+        padding: 10rem;
+      }
+      .section--1 {
+        background-color: olivedrab;
+      }
+      .section--2 {
+        background-color: olive;
+      }
+      .section--3 {
+        background-color: orangered;
+      }
+      .section--4 {
+        background-color: tomato;
+      }
+      .section--5 {
+        background-color: yellowgreen;
+      }
+      header {
+        position: fixed;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button class="btn btn__section-1">section 1</button>
+      <button class="btn btn__section-2">section 2</button>
+      <button class="btn btn__section-3">section 3</button>
+      <button class="btn btn__section-4">section 4</button>
+      <button class="btn btn__section-5">section 5</button>
+    </header>
+    <section class="section section--1"><h2>Section 1</h2></section>
+    <section class="section section--2"><h2>Section 2</h2></section>
+    <section class="section section--3"><h2>Section 3</h2></section>
+    <section class="section section--4"><h2>Section 4</h2></section>
+    <section class="section section--5"><h2>Section 5</h2></section>
+
+    <script>
+      const btnS1 = document.querySelector(".btn__section-1");
+      const btnS2 = document.querySelector(".btn__section-2");
+      const btnS3 = document.querySelector(".btn__section-3");
+      const btnS4 = document.querySelector(".btn__section-4");
+      const btnS5 = document.querySelector(".btn__section-5");
+      const section1 = document.querySelector(".section--1");
+      const section2 = document.querySelector(".section--2");
+      const section3 = document.querySelector(".section--3");
+      const section4 = document.querySelector(".section--4");
+      const section5 = document.querySelector(".section--5");
+
+      btnS1.addEventListener("click", function (e) {
+        const section1Coord = section1.getBoundingClientRect();
+        window.scrollTo({
+          left: section1Coord.left + window.pageXOffset,
+          top: section1Coord.top + window.pageYOffset,
+          behavior: "smooth",
+        });
+      });
+      btnS2.addEventListener("click", function () {
+        const section2Coord = section2.getBoundingClientRect();
+        window.scrollTo({
+          left: window.pageXOffset + section2Coord.left,
+          top: window.pageYOffset + section2Coord.top,
+          behavior: "smooth",
+        });
+      });
+      btnS3.addEventListener("click", function () {
+        const section3Coord = section3.getBoundingClientRect();
+        window.scrollTo({
+          left: window.pageXOffset + section3Coord.left,
+          top: window.pageYOffset + section3Coord.top,
+          behavior: "smooth",
+        });
+      });
+      btnS4.addEventListener("click", function () {
+        section4.scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+      btnS5.addEventListener("click", function () {
+        section5.scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+    </script>
+  </body>
+</html>

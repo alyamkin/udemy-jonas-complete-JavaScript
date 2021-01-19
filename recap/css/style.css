@@ -1,0 +1,13 @@
+.list-item {
+  color: #3f3f3f;
+  font-size: large;
+  background-color: antiquewhite;
+}
+
+.list {
+  list-style: none;
+}
+
+.text-red {
+  color: red;
+}

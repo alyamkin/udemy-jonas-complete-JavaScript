@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bubbling and Capturing</title>
+    <style>
+      body {
+        background-color: skyblue;
+        color: white;
+      }
+      section {
+        background-color: teal;
+        padding: 100px;
+      }
+      p {
+        background-color: orange;
+        padding: 50px;
+      }
+      a {
+        background-color: orangered;
+        padding: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <p>A paragraph with a <a>link</a></p>
+      <p>A second paragraph</p>
+    </section>
+
+    <script>
+      document.querySelector("a").addEventListener("click", function (e) {
+        alert("You clicked <a>");
+      });
+      document.querySelector("p").addEventListener(
+        "click",
+        function (e) {
+          alert("You clicked <p>");
+        },
+        false
+      );
+    </script>
+  </body>
+</html>

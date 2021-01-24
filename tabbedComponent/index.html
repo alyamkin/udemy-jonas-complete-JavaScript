@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabbed Component</title>
+    <style>
+      :root {
+        --color-primary: #5ec576;
+        --color-secondary: #ffcb03;
+        --color-tertiary: #ff585f;
+        --color-primary-darker: #4bbb7d;
+        --color-secondary-darker: #ffbb00;
+        --color-tertiary-darker: #fd424b;
+        --color-primary-opacity: #5ec5763a;
+        --color-secondary-opacity: #ffcd0331;
+        --color-tertiary-opacity: #ff58602d;
+        --gradient-primary: linear-gradient(to top left, #39b385, #9be15d);
+        --gradient-secondary: linear-gradient(to top left, #ffb003, #ffcb03);
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+      html {
+        font-size: 62.5;
+        box-sizing: border-box;
+      }
+      body {
+        display: flex;
+        height: 100vh;
+        background-color: #f3f3f3;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .btn {
+        background-color: var(--color-primary);
+        border: none;
+        outline: none;
+        padding: 1.25rem 4.25rem;
+        font-size: 1rem;
+        border-radius: 10rem;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background-color: var(--color-primary-darker);
+      }
+
+      .paragraphs {
+        max-width: 100rem;
+        margin: 0 auto;
+        background-color: #fff;
+      }
+      .paragraphs__tab-container {
+        display: flex;
+        justify-content: center;
+      }
+      .paragraphs__tab {
+        margin-right: 2.5rem;
+        transform: translateY(-50%);
+      }
+      .paragraphs__tab-container {
+        display: flex;
+        justify-content: center;
+      }
+      .paragraphs__tab span {
+        margin-right: 1rem;
+        font-weight: 600;
+        display: inline-block;
+      }
+
+      .paragraphs__tab--1 {
+        background-color: var(--color-secondary);
+      }
+
+      .paragraphs__tab--1:hover {
+        background-color: var(--color-secondary-darker);
+      }
+
+      .paragraphs__tab--3 {
+        background-color: var(--color-tertiary);
+        margin: 0;
+      }
+
+      .paragraphs__tab--3:hover {
+        background-color: var(--color-tertiary-darker);
+      }
+      .paragraphs__tab--active {
+        transform: translateY(-66%);
+      }
+      .paragraphs__content {
+        padding: 0 2rem;
+        font-size: 1rem;
+        display: none;
+      }
+      .paragraphs__content--active {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="section" id="section--1">
+      <div class="paragraphs">
+        <div class="paragraphs__tab-container">
+          <button
+            class="btn paragraphs__tab paragraphs__tab--1 paragraphs__tab--active"
+            data-tab="1"
+          >
+            <span>01</span>paragraph
+          </button>
+          <button class="btn paragraphs__tab paragraphs__tab--2" data-tab="2">
+            <span>02</span>paragraph
+          </button>
+          <button class="btn paragraphs__tab paragraphs__tab--3" data-tab="3">
+            <span>03</span>paragraph
+          </button>
+        </div>
+
+        <div
+          class="paragraphs__content paragraphs__content--1 paragraphs__content--active"
+        >
+          <p>Hello. My name is Andrey</p>
+        </div>
+        <div class="paragraphs__content paragraphs__content--2">
+          <p>I'm 36 years old</p>
+        </div>
+        <div class="paragraphs__content paragraphs__content--3">
+          <p>I'm a professional programmer</p>
+        </div>
+      </div>
+    </section>
+    <script>
+      const tabs = document.querySelectorAll(".paragraphs__tab");
+      const tabsContainer = document.querySelector(
+        ".paragraphs__tab-container"
+      );
+      const tabsContent = document.querySelectorAll(".paragraphs__content");
+
+      tabsContainer.addEventListener("click", function (e) {
+        const clicked = e.target.closest(".paragraphs__tab");
+
+        if (!clicked) return;
+
+        // clear classes
+        tabs.forEach((t) => t.classList.remove("paragraphs__tab--active"));
+        tabsContent.forEach((c) =>
+          c.classList.remove("paragraphs__content--active")
+        );
+
+        // add classes
+        clicked.classList.add("paragraphs__tab--active");
+        document
+          .querySelector(`.paragraphs__content--${clicked.dataset.tab}`)
+          .classList.add("paragraphs__content--active");
+      });
+    </script>
+  </body>
+</html>

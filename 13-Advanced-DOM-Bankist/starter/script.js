@@ -47,7 +47,7 @@ btnScrollTo.addEventListener('click', function () {
 });
 
 ///////////////////////////////////////
-// Page navigation
+/* ***** Page navigation ***** */
 
 document.querySelector('.nav__links').addEventListener('click', function (e) {
   // Matching strategy
@@ -62,7 +62,7 @@ document.querySelector('.nav__links').addEventListener('click', function (e) {
 });
 
 ///////////////////////////////////////
-// tabs operations
+/* ***** tabs operations ***** */
 
 tabsContainer.addEventListener('click', e => {
   const clicked = e.target.closest('.operations__tab');
@@ -86,7 +86,8 @@ tabsContainer.addEventListener('click', e => {
     .classList.add('operations__content--active');
 });
 
-// Menu fade animation
+///////////////////////////////////////
+/* ***** Menu fade animation ***** */
 const handleHover = function (e) {
   if (e.target.classList.contains('nav__link')) {
     const link = e.target;
@@ -123,7 +124,9 @@ nav.addEventListener('mouseout', handleHover.bind(1));
 });
 */
 
-// Sticky navigation: Intersection Observer API
+///////////////////////////////////////
+/* ***** Sticky navigation: Intersection Observer API ***** */
+
 /*const obsCallback = function (entries, observer) {
   entries.forEach(entry => {
     console.log(entry);
@@ -141,7 +144,6 @@ const navHeight = nav.getBoundingClientRect().height;
 
 const stickyNav = function (entries) {
   const [entry] = entries;
-  console.log(entry);
   if (!entry.isIntersecting) {
     nav.classList.add('sticky');
   } else {
@@ -155,6 +157,49 @@ const headerObserver = new IntersectionObserver(stickyNav, {
   rootMargin: `-${navHeight}px`,
 });
 headerObserver.observe(header);
+
+///////////////////////////////////////
+/* ***** Reveale sections ***** */
+const allSections = document.querySelectorAll('.section');
+const revealeSection = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+  entry.target.classList.remove('section--hidden');
+  observer.unobserve(entry.target);
+};
+
+const sectionObserver = new IntersectionObserver(revealeSection, {
+  root: null,
+  threshold: 0.15,
+});
+allSections.forEach(function (section) {
+  section.classList.add('section--hidden');
+  sectionObserver.observe(section);
+});
+
+///////////////////////////////////////
+/* ***** Lazy loading images ***** */
+const imgTargets = document.querySelectorAll('img[data-src]');
+const loadImg = function (entries, observer) {
+  const [entry] = entries;
+  if (!entry.isIntersecting) return;
+
+  // Replace src with data-src
+  entry.target.src = entry.target.dataset.src;
+  entry.target.addEventListener('load', function (e) {
+    entry.target.classList.remove('lazy-img');
+  });
+  observer.unobserve(entry.target);
+};
+const imgObserver = new IntersectionObserver(loadImg, {
+  root: null,
+  threshold: 0,
+  rootMargin: '200px',
+});
+
+imgTargets.forEach(img => {
+  imgObserver.observe(img);
+});
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////

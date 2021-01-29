@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Candy Inc | Navigation</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+
+      html {
+        font-size: 62.5%;
+        box-sizing: border-box;
+      }
+
+      body {
+        color: #444;
+        background-color: #f3f3f3;
+        font-family: "Roboto", sans-serif;
+      }
+      .header__title,
+      .section {
+        border-top: 1px solid #444;
+        line-height: 50vh;
+        text-align: center;
+      }
+
+      .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 9rem;
+        width: 100%;
+        padding: 0rem 5rem;
+      }
+      .nav__logo {
+        font-size: 3rem;
+        font-weight: 700;
+        transition: all 0.2s;
+      }
+      .nav__links {
+        list-style: none;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .nav__item {
+        margin-left: 4rem;
+      }
+      .nav__link:link,
+      .nav__link:visited {
+        font-size: 1.7rem;
+        font-weight: 400;
+        color: inherit;
+        text-decoration: none;
+        transition: all 0.2s;
+      }
+      .nav.sticky {
+        position: fixed;
+        background-color: rgba(255, 255, 255, 0.95);
+        transition: all 0.5s;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="header">
+      <nav class="nav">
+        <div class="nav__logo">
+          <p>Candy Inc.</p>
+        </div>
+        <ul class="nav__links">
+          <li class="nav__item">
+            <a
+              href="section--1"
+              class="nav__link nav__link--1"
+              data-nav-link="1"
+              >Home</a
+            >
+          </li>
+          <li class="nav__item">
+            <a
+              href="section--2"
+              class="nav__link nav__link--2"
+              data-nav-link="2"
+              >About</a
+            >
+          </li>
+          <li class="nav__item">
+            <a
+              href="section--3"
+              class="nav__link nav__link--3"
+              data-nav-link="3"
+              >Products</a
+            >
+          </li>
+          <div class="nav__item">
+            <a
+              href="section--4"
+              class="nav__link nav__link--4"
+              data-nav-link="4"
+              >Contacts</a
+            >
+          </div>
+        </ul>
+      </nav>
+      <div class="header__title">
+        <h1>Header title</h1>
+      </div>
+    </header>
+    <section class="section section--1" id="section--1">
+      <h2>Section 1</h2>
+    </section>
+    <section class="section section--2" id="section--2">
+      <h2>Section 2</h2>
+    </section>
+    <section class="section section--3" id="section--3">
+      <h2>Section 3</h2>
+    </section>
+    <section class="section section--4" id="section--4">
+      <h2>Section 4</h2>
+    </section>
+    <script>
+      const navContainer = document.querySelector(".nav__links");
+      const nav = document.querySelector(".nav");
+      const navHeader = document.querySelector(".header");
+
+      /* ***** Implement smooth scrolling ***** */
+
+      navContainer.addEventListener("click", function (e) {
+        e.preventDefault();
+        // choose all elements with nav__link class
+        const checkedLink = e.target.closest(".nav__link");
+
+        if (!checkedLink) return;
+
+        // get section id from nav__link href exampl: section--1
+        const sectionId = e.target.getAttribute("href");
+
+        // get section by id based on sectionId
+        document.getElementById(sectionId).scrollIntoView({
+          behavior: "smooth",
+        });
+      });
+
+      /* ***** Implement Sticky navigation ***** */
+
+      // get height for nav element
+      const navHeight = nav.getBoundingClientRect().height;
+
+      // callback bfunction when we move from .head element
+      const stickyNav = function (entries) {
+        const [entry] = entries;
+        if (!entry.isIntersecting) {
+          nav.classList.add("sticky");
+        } else {
+          nav.classList.remove("sticky");
+        }
+      };
+      // IntersectionObserver object to observe the head element. Each time when viewport moveIn or move out from header element the stickyNav function is called
+      const navObserver = new IntersectionObserver(stickyNav, {
+        root: null,
+        threshold: 0,
+        rootMargin: `-${navHeight}px`,
+      });
+      navObserver.observe(navHeader);
+
+      /* ***** Implement animation for navigation ***** */
+
+      const handleNavHover = function (e) {
+        if (e.target.classList.contains("nav__link")) {
+          const link = e.target;
+          const navLogo = link.closest(".nav").querySelector(".nav__logo");
+          const sublings = link.closest(".nav").querySelectorAll(".nav__link");
+          sublings.forEach((el) => {
+            if (el != link) {
+              el.style.cssText = `opacity: ${this}`;
+            }
+          });
+
+          navLogo.style.cssText = `opacity: ${this}`;
+        }
+      };
+
+      navContainer.addEventListener("mouseover", handleNavHover.bind(0.5));
+      navContainer.addEventListener("mouseout", handleNavHover.bind(1));
+    </script>
+  </body>
+</html>

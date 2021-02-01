@@ -27,10 +27,13 @@
         background-color: #f3f3f3;
         font-family: "Roboto", sans-serif;
       }
-      .header__title,
-      .section {
+      .header__title {
         border-top: 1px solid #444;
         line-height: 50vh;
+        text-align: center;
+      }
+      .section {
+        border-top: 1px solid #444;
         text-align: center;
       }
 
@@ -68,6 +71,15 @@
         position: fixed;
         background-color: rgba(255, 255, 255, 0.95);
         transition: all 0.5s;
+        z-index: 100;
+      }
+
+      .section-img {
+        width: 100%;
+      }
+
+      .lazy-img {
+        filter: blur(20px);
       }
     </style>
   </head>
@@ -117,21 +129,42 @@
       </div>
     </header>
     <section class="section section--1" id="section--1">
-      <h2>Section 1</h2>
+      <img
+        src="img/forest-lazy.jpg"
+        alt="forest"
+        data-src="img/forest.jpg"
+        class="section-img lazy-img"
+      />
     </section>
     <section class="section section--2" id="section--2">
-      <h2>Section 2</h2>
+      <img
+        src="img/lake-lazy.jpg"
+        alt="lake"
+        data-src="img/lake.jpg"
+        class="section-img lazy-img"
+      />
     </section>
     <section class="section section--3" id="section--3">
-      <h2>Section 3</h2>
+      <img
+        src="img/star-sky-lazy.jpg"
+        alt="star sky"
+        data-src="img/star-sky.jpg"
+        class="section-img lazy-img"
+      />
     </section>
     <section class="section section--4" id="section--4">
-      <h2>Section 4</h2>
+      <img
+        src="img/root-tree-lazy.jpg"
+        alt="root tree sky"
+        data-src="img/root-tree.jpg"
+        class="section-img lazy-img"
+      />
     </section>
     <script>
       const navContainer = document.querySelector(".nav__links");
       const nav = document.querySelector(".nav");
       const navHeader = document.querySelector(".header");
+      const lazyImg = document.querySelectorAll("img[data-src]");
 
       /* ***** Implement smooth scrolling ***** */
 
@@ -192,6 +225,27 @@
 
       navContainer.addEventListener("mouseover", handleNavHover.bind(0.5));
       navContainer.addEventListener("mouseout", handleNavHover.bind(1));
+
+      /* ***** Implement lazy-load of the images ***** */
+      const loadImg = function (entries, observer) {
+        const [entry] = entries;
+        // guard
+        if (!entry.isIntersecting) return;
+
+        entry.target.src = entry.target.dataset.src;
+        entry.target.addEventListener("load", function () {
+          entry.target.classList.remove("lazy-img");
+        });
+        observer.unobserve(entry.target);
+      };
+      const imgObserver = new IntersectionObserver(loadImg, {
+        root: null,
+        threshold: 0,
+        rootMargin: "200px",
+      });
+      lazyImg.forEach((img) => {
+        imgObserver.observe(img);
+      });
     </script>
   </body>
 </html>

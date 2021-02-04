@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>Gallery</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: inherit;
+      }
+      html {
+        font-size: 62.5%;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Roboto", sans-serif;
+      }
+      header {
+        padding: 2rem;
+      }
+      h1 {
+        font-size: 2.5rem;
+        text-align: center;
+      }
+      .gallery__header {
+        padding: 2rem;
+      }
+      h2 {
+        font-size: 2rem;
+        text-align: center;
+      }
+      .gallery__row {
+        margin-bottom: 1rem;
+        padding: 1rem;
+      }
+      .gallery__images {
+        display: flex;
+        justify-content: space-between;
+      }
+      .img__container {
+        width: 33.333%;
+      }
+      .img__container:not(:last-child) {
+        margin-right: 1rem;
+      }
+      .gallery__image {
+        width: 100%;
+      }
+      .lazy-img {
+        filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Welcome to my gallery!</h1>
+    </header>
+    <main>
+      <!-- Forests -->
+      <div class="gallery__row gallery__row--1">
+        <div class="gallery__header">
+          <h2>Forests</h2>
+        </div>
+        <div class="gallery__images">
+          <div class="img__container">
+            <img
+              src="img/forest-lazy-1.jpg"
+              alt="Forest 1"
+              data-src="img/forest-1.jpg"
+              class="gallery__image gallery__image--1 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/forest-lazy-2.jpg"
+              alt="Forest 2"
+              data-src="img/forest-2.jpg"
+              class="gallery__image gallery__image--2 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/forest-lazy-3.jpg"
+              alt="Forest 3"
+              data-src="img/forest-3.jpg"
+              class="gallery__image gallery__image--3 lazy-img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Oceans -->
+      <div class="gallery__row gallery__row--2">
+        <div class="gallery__header">
+          <h2>Oceans</h2>
+        </div>
+        <div class="gallery__images">
+          <div class="img__container">
+            <img
+              src="img/ocean-lazy-1.jpg"
+              alt="Ocean 1"
+              data-src="img/ocean-1.jpg"
+              class="gallery__image gallery__image--4 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/ocean-lazy-2.jpg"
+              alt="Ocean 2"
+              data-src="img/ocean-2.jpg"
+              class="gallery__image gallery__image--5 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/ocean-lazy-3.jpg"
+              alt="Ocean 3"
+              data-src="img/ocean-3.jpg"
+              class="gallery__image gallery__image--6 lazy-img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Lakes -->
+      <div class="gallery__row gallery__row--3">
+        <div class="gallery__header">
+          <h2>Lakes</h2>
+        </div>
+        <div class="gallery__images">
+          <div class="img__container">
+            <img
+              src="img/lake-lazy-1.jpg"
+              alt="Lake 1"
+              data-src="img/lake-1.jpg"
+              class="gallery__image gallery__image--7 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/lake-lazy-2.jpg"
+              alt="Lake 2"
+              data-src="img/lake-2.jpg"
+              class="gallery__image gallery__image--8 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/lake-lazy-3.jpg"
+              alt="Lake 3"
+              data-src="img/lake-3.jpg"
+              class="gallery__image gallery__image--9 lazy-img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Mountains -->
+      <div class="gallery__row gallery__row--4">
+        <div class="gallery__header">
+          <h2>Mountains</h2>
+        </div>
+        <div class="gallery__images">
+          <div class="img__container">
+            <img
+              src="img/mountain-lazy-1.jpg"
+              alt="Mountain 1"
+              data-src="img/mountain-1.jpg"
+              class="gallery__image gallery__image--10 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/mountain-lazy-2.jpg"
+              alt="Mountain 2"
+              data-src="img/mountain-2.jpg"
+              class="gallery__image gallery__image--11 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/mountain-lazy-3.jpg"
+              alt="Mountain 3"
+              data-src="img/mountain-3.jpg"
+              class="gallery__image gallery__image--12 lazy-img"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Tigers -->
+      <div class="gallery__row gallery__row--5">
+        <div class="gallery__header">
+          <h2>Tigers</h2>
+        </div>
+        <div class="gallery__images">
+          <div class="img__container">
+            <img
+              src="img/tiger-lazy-1.jpg"
+              alt="Tiger 1"
+              data-src="img/tiger-1.jpg"
+              class="gallery__image gallery__image--13 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/tiger-lazy-2.jpg"
+              alt="Tiger 2"
+              data-src="img/tiger-2.jpg"
+              class="gallery__image gallery__image--14 lazy-img"
+            />
+          </div>
+          <div class="img__container">
+            <img
+              src="img/tiger-lazy-3.jpg"
+              alt="Tiger 3"
+              data-src="img/tiger-3.jpg"
+              class="gallery__image gallery__image--15 lazy-img"
+            />
+          </div>
+        </div>
+      </div>
+    </main>
+    <script>
+      const galleryRows = document.querySelectorAll(".gallery__images");
+      const loadImg = function (entries, observer) {
+        const [entry] = entries;
+        if (!entry.isIntersecting) return;
+        const imgs = entry.target.querySelectorAll(`img[data-src]`);
+        imgs.forEach((img) => {
+          img.src = img.dataset.src;
+          img.addEventListener("load", function () {
+            img.classList.remove("lazy-img");
+          });
+        });
+        observer.unobserve(entry.target);
+      };
+      const rowObserver = new IntersectionObserver(loadImg, {
+        root: null,
+        threshold: 0,
+        rootMargin: "100px",
+      });
+      galleryRows.forEach((galleryRow) => {
+        rowObserver.observe(galleryRow);
+      });
+    </script>
+  </body>
+</html>

@@ -895,3 +895,29 @@ const answer = Number(prompt(`${question.get("question")} \n${options}`));
 
 console.log(question.get(answer === question.get("correct")));
 */
+
+// Strings
+
+/*
+const myName = "Annndrrreyyyrryyy";
+const unique = new Set(myName);
+const myNameCleared = [...unique].join("");
+console.log(myNameCleared);
+*/
+const str = "My name is Andrey";
+console.log(str[1]);
+console.log(str.split(" "));
+console.log(str.toUpperCase());
+console.log(str.toLowerCase());
+console.log(str.replace(/e/g, "R"));
+console.log(str.trimLeft());
+console.log(str.padStart(50, "*"));
+console.log(str.indexOf("n"));
+console.log(str.lastIndexOf("n"));
+console.log(str.slice(0, str.indexOf("n")));
+console.log(str.slice(3, 7));
+console.log(str.replace("a", "*"));
+console.log(str.includes("is"));
+
+const [firstName, lastName] = "Andrey Lyamkin".split(" ");
+console.log(firstName, lastName);

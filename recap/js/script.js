@@ -552,3 +552,346 @@ document.querySelector(".btn__style-p").addEventListener("click", function () {
 });
 console.log(document.querySelector("#paragraph").dataset.someText);
 */
+
+/*  ******************RECAP 04.02.2021******************* */
+// This keyword 96
+/*
+console.log(this);
+
+const calacAge = function (birthYear) {
+  console.log(`Regular call function ${this}`);
+  return 2021 - birthYear;
+};
+
+const calacAge = (birthYear) => {
+  console.log(`Regular call function ${this}`);
+  return 2021 - birthYear;
+};
+console.log(calacAge(1985));
+
+
+const andreyObj = {
+  birthYear: 1985,
+  calcAge: function () {
+    console.log(2021 - this.birthYear);
+  },
+};
+
+const yanaObj = {
+  birthYear: 1982,
+};
+
+andreyObj.calcAge();
+
+yanaObj.calcAge = andreyObj.calcAge;
+
+yanaObj.calcAge();
+*/
+
+//99. Primitives vs. Objects (Primitive vs. Reference Types) 99
+/*
+let age = 34;
+let ageNew = age;
+ageNew = 35;
+
+console.log(age);
+console.log(ageNew);
+
+const me = {
+  firstName: "Andrey",
+  age: 35,
+};
+
+const friend = me;
+
+friend.age = 40;
+
+console.log(me);
+
+
+const me = {
+  firstName: "Andrey",
+  age: 35,
+};
+
+const meCopy = { ...me };
+
+console.log(me, meCopy);
+meCopy.age = 50;
+console.log(me, meCopy);
+*/
+
+// Destructuring arrays 103
+/*
+const arr = [1, 2, 3];
+
+const [x, y, z] = arr;
+
+console.log(x, y, z);
+
+
+const arr = [1, 2];
+
+const [x, y, z = 10] = arr;
+
+console.log(x, y, z);
+
+
+const arr = [1, 2];
+
+const [x, , z = 10] = arr;
+
+console.log(x, z);
+
+
+
+const nestedArr = [1, 2, 3, [4, 5]];
+
+const [x, y, z, [r, t]] = nestedArr;
+console.log(x, y, z, r, t);
+*/
+
+//Destructuring Objects 104
+/*
+const me = {
+  firstName: "Andrey",
+  age: 35,
+  friends: { friend1: "Yana", friend2: "Nastya" },
+};
+
+const { age, firstName } = me;
+
+console.log(age, firstName);
+
+
+const { age: myAge, firstName } = me;
+console.log(myAge, firstName);
+
+
+let a = 111;
+let b = 555;
+
+const obj = { a: 5, b: 6, c: 41 };
+
+({ a, b } = obj);
+console.log(a, b);
+
+
+const {
+  firstName,
+  age,
+  friends: { friend1, friend2 },
+} = me;
+
+console.log(firstName, age, friend1, friend2);
+*/
+
+//The Spread Operator (...) 105
+/*
+let arr = [1, 2, 3];
+let arr2 = [...arr, 4, 5, 6];
+const arr3 = [3, 2, 1];
+
+
+console.log(arr2);
+
+const newArr = [...arr, ...arr3];
+console.log(newArr);
+
+const arr4 = arr3;
+console.log(arr3);
+arr4[0] = 10;
+console.log(arr3);
+
+
+const arr4 = [...arr3];
+console.log(arr3, arr4);
+arr4[0] = 10;
+console.log(arr3, arr4);
+
+
+const myName = "Andrey";
+
+const letters = [...myName];
+console.log(letters);
+
+
+const sum = function (x, y) {
+  return x + y;
+};
+
+const val = [3, 5];
+
+console.log(sum(...val));
+*/
+
+//Rest Pattern and Parameters 106
+/*
+const arr = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+const [x, y, ...others] = arr;
+
+console.log(x, y, others);
+
+
+const me = {
+  firstName: "Andrey",
+  lastName: "Lyamkin",
+  age: 35,
+};
+
+const { firstName, lastName, ...others } = me;
+
+console.log(firstName, lastName, others);
+*/
+
+// Short Circuiting (&& and ||) 107
+
+/*
+console.log(null || false || 5 || true);
+console.log("" || null || "Andrey");
+console.log(undefined || null);
+
+
+
+const toPay = 0 || 10;
+console.log(toPay);
+
+console.log(7 && "Andrey");
+console.log("Hello" && 23 && 23 && null && "Andrey");
+*/
+
+/*
+// The Nullish Coalescing Operator (??) 108
+const value = 0;
+// const rez = value || 10;
+const rez = value ?? 100;
+
+console.log(rez);
+*/
+
+/*
+//Looping Arrays: The for-of Loop 110
+
+for (const [i, mov] of movements.entries()) {
+  console.log(mov, i);
+}
+*/
+
+/*
+// Optional Chaining (.?) 112
+const weekDays = ["mon", "tue", "wed", "thu", "fri", "sat", "sun"];
+const schedule = {
+  mon: { open: "7am", close: "11pm" },
+  tue: { open: "7am", close: "11pm" },
+  wed: { open: "7am", close: "11pm" },
+  thu: { open: "7am", close: "11pm" },
+  fri: { open: "7am", close: "11pm" },
+  sat: { open: "10am", close: "9pm" },
+};
+
+weekDays.forEach((weekDay) => {
+  console.log(
+    `On ${weekDay} the store open at ${
+      schedule[weekDay]?.open ?? "closed"
+    } and close at ${schedule[weekDay]?.close ?? "closed"}`
+  );
+});
+
+const me = {
+  firstName: "Andrey",
+  lastName: "Lyamkin",
+  year: 1985,
+  calcAge: function (curYear) {
+    console.log(curYear - this.year);
+  },
+};
+
+me.calcAge?.(2021);
+console.log(me.calcAg?.(2021) ?? "Method does not exist");
+*/
+
+/*
+// Looping Objects: Object Keys, Values, and Entries 113
+
+const schedule = {
+  mon: { open: "7am", close: "11pm" },
+  tue: { open: "7am", close: "11pm" },
+  wed: { open: "7am", close: "11pm" },
+  thu: { open: "7am", close: "11pm" },
+  fri: { open: "7am", close: "11pm" },
+  sat: { open: "10am", close: "9pm" },
+};
+
+for (const keys of Object.keys(schedule)) {
+  console.log(keys);
+}
+
+for (const values of Object.values(schedule)) {
+  console.log(values);
+}
+
+for (const [key, { open, close }] of Object.entries(schedule)) {
+  console.log(`${key} : ${open} - ${close} `);
+}
+*/
+
+/*
+// Sets 115
+
+const names = new Set(["Andrey", "Andrey", "Yana"]);
+console.log(names);
+console.log(names.size);
+
+const myName = new Set("Andrey");
+console.log(myName);
+console.log(myName.size);
+console.log(myName.has("t"));
+myName.add("p");
+console.log(myName);
+myName.delete("p");
+console.log(myName);
+
+const namesArr = [...names];
+console.log(namesArr);
+*/
+
+/*
+//Maps: Fundamentals 116
+
+const myMap = new Map();
+
+myMap.set("firstName", "Andrey");
+myMap.set("lastName", "Lyamkin");
+myMap.set("age", 35);
+
+console.log(myMap.get("age"));
+
+myMap.delete("age");
+console.log(myMap);
+console.log(myMap.size);
+*/
+
+/*
+// Maps: Iteration 117
+const question = new Map([
+  ["question", "What is the best programming language in the world"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "Javascript"],
+  ["correct", 3],
+  [true, "Correct"],
+  [false, "Try again"],
+]);
+
+let options = ``;
+question.forEach((value, key) => {
+  if (typeof key === "number") {
+    options += `${key} : ${value} \n`;
+  }
+});
+
+const answer = Number(prompt(`${question.get("question")} \n${options}`));
+
+console.log(question.get(answer === question.get("correct")));
+*/

@@ -903,7 +903,7 @@ const myName = "Annndrrreyyyrryyy";
 const unique = new Set(myName);
 const myNameCleared = [...unique].join("");
 console.log(myNameCleared);
-*/
+
 const str = "My name is Andrey";
 console.log(str[1]);
 console.log(str.split(" "));
@@ -921,3 +921,114 @@ console.log(str.includes("is"));
 
 const [firstName, lastName] = "Andrey Lyamkin".split(" ");
 console.log(firstName, lastName);
+*/
+
+/*
+// Default Parameters 126
+
+const calcTotal = function (total, discount = 0) {
+  return total - (discount / total) * 100;
+};
+
+console.log(calcTotal(100, 60));
+*/
+
+/*
+// How Passing Arguments Works: Value vs. Reference 127
+const income = 80000;
+const me = {
+  fName: "Andrey",
+  lName: "Lyamkin",
+  sin: 575869434,
+};
+console.log(income, me.sin);
+const payTax = function (incomeTotal, person) {
+  incomeTotal = 90000;
+  person.sin = 111111111;
+};
+payTax(income, me);
+
+console.log(income, me.sin);
+*/
+
+/*
+// First-Class and Higher-Order Functions 128
+//  Functions Accepting Callback Functions 129
+
+const capitalizeFirstLowerRest = function (str) {
+  const [first, ...rest] = [...str.toLowerCase()];
+  return [first.toUpperCase(), ...rest].join("");
+};
+
+const undescoreLetters = function (str) {
+  const letters = [...str];
+  return letters.join("_");
+};
+
+const strModifier = function (str, func) {
+  return func(str);
+};
+const str = "ANDREY";
+console.log(strModifier(str, capitalizeFirstLowerRest));
+console.log(strModifier(str, undescoreLetters));
+*/
+
+/*
+// Functions Returning Functions 130
+
+const authUser = function (name) {
+  return function (pass) {
+    console.log(`Welcome back ${name} your pass is ${pass}`);
+  };
+};
+
+const user1 = authUser("Andrey");
+user1(12345);
+*/
+
+/*
+// The call and apply Methods 131
+
+const me = {
+  fName: "Andrey",
+  lName: "Lyamkin",
+  year: 1985,
+  calcAge: function (currYear, value) {
+    console.log(
+      `${this.fName} ${this.lName} is ${
+        currYear - this.year
+      } and value : ${value}`
+    );
+  },
+};
+
+const yana = {
+  fName: "Yana",
+  lName: "Golovatskaya",
+  year: 1982,
+};
+me.calcAge(2021, 123);
+me.calcAge.call(yana, 2021, 345);
+me.calcAge.call(yana, ...[2021, 678]);
+me.calcAge.apply(yana, [2021, 543]);
+
+const yanaCalcAge = me.calcAge.bind(yana, 2021);
+
+yanaCalcAge(988);
+*/
+
+// Closures 135
+
+const bookReservation = function () {
+  let reservations = 0;
+  return function () {
+    reservations++;
+    console.log(`Number of reservations : ${reservations}`);
+  };
+};
+
+const reserve = bookReservation();
+reserve();
+reserve();
+reserve();
+reserve();

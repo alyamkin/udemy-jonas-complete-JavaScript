@@ -620,3 +620,113 @@ const dogsSortedReccomendedAsc = Array.from(
 );
 console.log(dogsSortedReccomendedAsc);
 */
+
+// Array Methods Practice 164
+
+/*
+// 1.
+let totalDeposits = 0;
+
+accounts.forEach(account => {
+  totalDeposits += account.movements.reduce(
+    (acc, mov) => (acc += mov > 0 ? mov : 0)
+  );
+});
+
+console.log(totalDeposits);
+
+const bankDepositSum = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce((acc, cur) => acc + cur, 0);
+
+console.log(bankDepositSum);
+
+let bankDepositsSum = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((deposits, cur) => (cur > 0 ? deposits + cur : deposits), 0);
+
+console.log(bankDepositsSum);
+*/
+
+/*
+// 2.
+// const depositsCount = accounts
+//   .flatMap(acc => acc.movements)
+//   .filter(mov => mov >= 1000).length;
+
+// console.log(depositsCount);
+
+const depositsCount = accounts
+  .flatMap(acc => acc.movements)
+  .reduce((count, cur) => (cur >= 1000 ? ++count : count), 0);
+
+console.log(depositsCount);
+
+let a = 10;
+console.log(++a);
+
+
+const { moreThan1000, lessThan1000 } = accounts
+  .flatMap(acc => acc.movements)
+  .filter(mov => mov > 0)
+  .reduce(
+    (movs, cur) => {
+      cur >= 1000 ? ++movs.moreThan1000 : ++movs.lessThan1000;
+      return movs;
+    },
+    { moreThan1000: 0, lessThan1000: 0 }
+  );
+
+console.log(moreThan1000, lessThan1000);
+*/
+/*
+// 3.
+const { deposits, withdrawals } = accounts
+  .flatMap(acc => acc.movements)
+  .reduce(
+    (sums, cur) => {
+      // cur > 0 ? (sums.deposits += cur) : (sums.withdrawals += cur);
+      sums[cur > 0 ? 'deposits' : 'withdrawals'] += cur;
+      return sums;
+    },
+    { deposits: 0, withdrawals: 0 }
+  );
+
+console.log(deposits, withdrawals);
+*/
+// 4.
+/*
+// this is a nice title -> This Is a Nice Title
+const title = 'this is a nice title';
+const convertTitleCase = function (title) {
+  const convertedTitle = title.split(' ').map(word => {
+    word = word.loLoverCase;
+    if (word.length > 1) {
+      const newWord = word.replace(word[0], word[0].toUpperCase());
+      return newWord;
+    } else {
+      return word;
+    }
+  });
+  return convertedTitle.join(' ');
+};
+
+console.log(convertTitleCase(title));
+*/
+
+/*
+const convertTitleCase = function (title) {
+  const capitalize = str => str[0].toUpperCase() + str.slice(1);
+
+  const exceptions = ['a', 'an', 'and', 'the', 'but', 'or', 'on', 'in', 'with'];
+  const titleCase = title
+    .toLowerCase()
+    .split(' ')
+    .map(word => (exceptions.includes(word) ? word : capitalize(word)))
+    .join(' ');
+  return titleCase;
+};
+
+console.log(convertTitleCase('this is a nice title'));
+*/

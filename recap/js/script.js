@@ -358,10 +358,10 @@ const calcAgeAndrey = calcAge.bind(andreyObj);
 
 console.log(calcAgeAndrey());
 */
-
+/*
 // 140. Simple Array Methods
 const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
-/*
+
 const movements2 = [...movements];
 const firstName = [..."Andrey"];
 movements.push(200);
@@ -1017,6 +1017,7 @@ const yanaCalcAge = me.calcAge.bind(yana, 2021);
 yanaCalcAge(988);
 */
 
+/*
 // Closures 135
 
 const bookReservation = function () {
@@ -1032,3 +1033,206 @@ reserve();
 reserve();
 reserve();
 reserve();
+*/
+
+/*
+// Simple Array Methods 141
+
+const arr = ["a", "b", "c", "d", "e", "f"];
+
+console.log(`Initial array: ${arr}`);
+arr.push("g");
+console.log(`push g: ${arr}`);
+arr.pop();
+console.log(`pop: ${arr}`);
+arr.unshift("a1");
+console.log(`unshift: ${arr}`);
+console.log(`pop: ${arr}`);
+arr.shift();
+console.log(`shift: ${arr}`);
+let arr2 = arr.slice();
+console.log(`Initial array: ${arr}`);
+console.log(`slice() arr2: ${arr2}`);
+let arr3 = arr.slice(-3, -2);
+console.log(`Initial array: ${arr}`);
+console.log(`slice() arr3: ${arr3}`);
+let arr4 = arr.splice(1);
+console.log(`After modification arr: ${arr}`);
+console.log(`slplice() arr4: ${arr4}`);
+
+
+//reverse
+let arr5 = arr.reverse();
+console.log(`After modification arr: ${arr}`);
+console.log(`reverse arr5: ${arr5}`);
+
+
+// concat
+let arrCopy = [...arr];
+let arr6 = arr.concat(arrCopy);
+console.log(`After modification arr: ${arr}`);
+console.log(`concat() arr6: ${arr6}`);
+
+
+// join
+let arr7 = arr.join("-");
+console.log(`After modification arr: ${arr}`);
+console.log(`join() arr7: ${arr7}`);
+
+
+// sort
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const sortMov = movements.sort((a, b) => a - b);
+console.log(movements);
+console.log(sortMov);
+
+*/
+/*
+// Looping Arrays: forEach 141
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const language = navigator.language;
+const options = {
+  style: "currency",
+  currency: "CAD",
+  useGrouping: false,
+};
+const formanCurrency = new Intl.NumberFormat(language, options);
+
+
+// for of
+for (const [index, mov] of movements.entries()) {
+  if (mov > 0) {
+    console.log(`${index + 1}: You deposited ${formanCurrency.format(mov)}`);
+  } else {
+    console.log(`${index + 1}: You withdrew ${formanCurrency.format(mov)}`);
+  }
+}
+
+
+// forEach
+movements.forEach((mov, index) => {
+  if (mov > 0) {
+    console.log(`${index + 1}: You deposited ${formanCurrency.format(mov)}`);
+  } else {
+    console.log(`${index + 1}: You withdrew ${formanCurrency.format(mov)}`);
+  }
+});
+*/
+/*
+// forEach With Maps and Sets 142
+// Map forEach
+const currencies = new Map([
+  ["USD", "United States dollar"],
+  ["EUR", "Euro"],
+  ["GBP", "Pound sterling"],
+]);
+
+currencies.forEach((value, key, arr) => {
+  console.log(`${key}: ${value}`);
+});
+
+
+// Set forEach
+const currenciesUnique = new Set(["USD", "GBR", "USD", "EUR", "EUR"]);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (index, value) {
+  console.log(`index ${index} value ${value}`);
+});
+*/
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+/*
+// The map Method 148
+const cadMovements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+const usMovements = cadMovements.map((mov) => mov * 1.2);
+
+console.log(cadMovements);
+console.log(usMovements);
+
+
+// The filter Method 150
+
+const deposits = movements.filter((mov) => mov > 0);
+
+console.log(deposits);
+const withdrawals = movements.filter((mov) => mov < 0);
+
+console.log(withdrawals);
+*/
+
+/*
+// The reduce Method 151
+
+const balance = movements.reduce((acc, mov) => acc + mov, 0);
+console.log(balance);
+//max value
+
+const maxMov = movements.reduce((acc, cur) => (acc = cur > acc ? cur : acc), 0);
+const minMov = movements.reduce((acc, cur) => (acc = cur < acc ? cur : acc), 0);
+console.log(maxMov);
+console.log(minMov);
+*/
+
+/*
+// The find Method 155
+
+const users = ["lyamkin", "golovat", "alex"];
+
+const findUser = users.find((user) => user === "golovat");
+console.log(findUser);
+*/
+
+/*
+// The findIndex Method 158
+const index = movements.findIndex((mov) => mov < -400);
+console.log(movements);
+console.log(index);
+*/
+
+/*
+// some and every 159
+const anyDeposits = movements.some((mov) => mov > 5000);
+console.log(movements);
+console.log(anyDeposits);
+*/
+
+/*
+// flat and flatMap 160
+const arr = [[1, 2, 3], [4, 5, 6], 7, 8];
+const arrFlat = arr.flat();
+
+console.log(arr);
+console.log(arrFlat);
+*/
+
+/*
+// More Ways of Creating and Filling Arrays 162
+const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const x = new Array(7);
+
+const arr2 = Array.from(arr, (el) => el * 2);
+console.log(arr2);
+
+const arr3 = Array.from(new Array(100), (el) =>
+  Math.trunc(Math.random() * 6 + 1)
+);
+
+console.log(arr3);
+*/
+
+/*
+// Random value func
+const randomArr = [];
+const random = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1) + min);
+};
+
+for (let i = 0; i < 100; i++) {
+  randomArr.push(random(-1, 10));
+}
+
+randomArr.sort((a, b) => a - b);
+
+console.log(randomArr);
+*/

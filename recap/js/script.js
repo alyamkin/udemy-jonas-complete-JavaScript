@@ -1236,3 +1236,139 @@ randomArr.sort((a, b) => a - b);
 
 console.log(randomArr);
 */
+
+// Converting and Checking Numbers 168
+/*
+console.log(Number("23"));
+console.log(+"23");
+
+// Parsing
+console.log(Number.parseInt("30", 10));
+console.log(Number.parseFloat("2.5", 10));
+
+// isNaN
+console.log(Number.isNaN("20"));
+console.log(Number.isNaN(20));
+console.log(Number.isNaN(+"20"));
+console.log(Number.isNaN(0 / 20));
+console.log(Number.isNaN(20 / 0));
+
+// isFinite
+console.log(Number.isFinite(20));
+console.log(Number.isFinite("20"));
+
+// isInteger
+console.log(Number.isInteger(20 / 2.5));
+*/
+
+/*
+// Math and Rounding 169
+console.log(Math.sqrt(25));
+console.log(Math.max(1, 2, 3, 4));
+console.log(Math.min(1, 2, 3, 4));
+
+
+const x = 2.4;
+const y = 2.5;
+const z = 2.6;
+
+console.log(
+  `Floor: ${x} = ${Math.floor(x)} : ${y} = ${Math.floor(
+    y
+  )} : ${z} = ${Math.floor(z)}`
+);
+console.log(
+  `Ceil: ${x} = ${Math.ceil(x)} : ${y} = ${Math.ceil(y)} : ${z} = ${Math.ceil(
+    z
+  )}`
+);
+console.log(
+  `Round: ${x} = ${Math.round(x)} : ${y} = ${Math.round(
+    y
+  )} : ${z} = ${Math.round(z)}`
+);
+console.log(
+  `Trunc: ${x} = ${Math.trunc(x)} : ${y} = ${Math.trunc(
+    y
+  )} : ${z} = ${Math.trunc(z)}`
+);
+
+console.log(`NEGATIVE NUMBERS`);
+const x1 = -2.4;
+const y1 = -2.5;
+const z1 = -2.6;
+
+console.log(
+  `Floor: ${x1} = ${Math.floor(x1)} : ${y1} = ${Math.floor(
+    y1
+  )} : ${z1} = ${Math.floor(z1)}`
+);
+console.log(
+  `Ceil: ${x1} = ${Math.ceil(x1)} : ${y1} = ${Math.ceil(
+    y1
+  )} : ${z1} = ${Math.ceil(z1)}`
+);
+console.log(
+  `Round: ${x1} = ${Math.round(x1)} : ${y1} = ${Math.round(
+    y1
+  )} : ${z1} = ${Math.round(z1)}`
+);
+console.log(
+  `Trunc: ${x1} = ${Math.trunc(x1)} : ${y1} = ${Math.trunc(
+    y
+  )} : ${z1} = ${Math.trunc(z1)}`
+);
+*/
+
+/*
+// 172. Creating Dates
+const now = new Date();
+
+console.log(now);
+
+console.log(new Date(2021, 1, 7));
+console.log(new Date(0));
+
+
+const futureDate = new Date(2022, 1, 7);
+console.log(futureDate);
+console.log(futureDate.getDate());
+console.log(futureDate.getDay());
+console.log(futureDate.getFullYear());
+console.log(futureDate.getHours());
+console.log(futureDate.getMilliseconds());
+console.log(futureDate.toISOString());
+console.log(futureDate.getTime());
+
+*/
+
+/*
+// 174. Operations With Dates
+
+const nowDate = new Date(2021, 1, 7);
+const futureDate = new Date(2021, 1, 10);
+
+const calcDayPasses = (date1, date2) => {
+  return Math.abs((date1 - date2) / (1000 * 60 * 60 * 24));
+};
+console.log(calcDayPasses(nowDate, futureDate));
+*/
+
+/*
+// 175. Internationalizing Dates (Intl)
+
+const now = new Date();
+const options = {
+  hour: "numeric",
+  minute: "numeric",
+  day: "numeric",
+  month: "numeric",
+  year: "numeric",
+};
+const internationalDate = new Intl.DateTimeFormat(
+  navigator.language,
+  options
+).format(now);
+
+console.log(now);
+*/

@@ -15,7 +15,7 @@ const Person = function (firstName, birthYear) {
 
 const jonas = new Person('Jonas', 1991);
 
-console.log(jonas);
+// console.log(jonas);
 // 1. New {} is created
 // 2. function is called, this = {}
 // 3. {} linked to prototype
@@ -29,9 +29,9 @@ console.log(jonas);
 
 const matilda = new Person('Matilda', 2017);
 const jack = new Person('Jack', 1975);
-console.log(matilda, jack);
+// console.log(matilda, jack);
 
-console.log(jonas instanceof Person);
+// console.log(jonas instanceof Person);
 
 // 206. Prototypes
 
@@ -45,19 +45,39 @@ jonas.calcAge();
 matilda.calcAge();
 jack.calcAge();
 
-console.log(jonas.__proto__);
-console.log(Person.prototype);
+// console.log(jonas.__proto__);
+// console.log(Person.prototype);
 
-console.log(Person.prototype.isPrototypeOf(jonas));
+// console.log(Person.prototype.isPrototypeOf(jonas));
 
 // .prototypeOfLinkedObjects
 Person.prototype.species = 'Homo Sapiens';
-console.log(jonas, matilda);
+// console.log(jonas, matilda);
 
-console.log(jonas.hasOwnProperty('firstName'));
+// console.log(jonas.hasOwnProperty('firstName'));
 
-console.log(jonas.hasOwnProperty('species'));
+// console.log(jonas.hasOwnProperty('species'));
 
-console.log(Number.isFinite(null));
+// console.log(Number.isFinite(null));
 
+// Object.prototype (top of prototype chain)
+// console.log(jonas.__proto__.__proto__.__proto__);
+
+// console.dir(Person.prototype.constructor);
 // 207. Prototypal Inheritance and The Prototype Chain
+// 208. Prototypal Inheritance on Built-In Objects
+
+const arr = [3, 6, 6, 9, 9, 4, 4, 5, 6, 9, 3];
+console.log(arr.__proto__);
+console.log(arr.__proto__ === Array.prototype);
+console.log(arr.__proto__.__proto__);
+
+Array.prototype.unique = function () {
+  return [...new Set(this)];
+};
+
+console.log(arr.unique());
+
+const h1 = document.querySelector('h1');
+
+console.dir(x => x + 1);

@@ -270,6 +270,52 @@ DATA CAR 1: 'Ford' going at 120 km/h
 GOOD LUCK 😀
 */
 
+// 1. Use a constructor function to implement a Car. A car has a make and a speed property. The speed property is the current speed of the car in km/h;
+// 2. Implement an 'accelerate' method that will increase the car's speed by 10, and log the new speed to the console;
+// 3. Implement a 'brake' method that will decrease the car's speed by 5, and log the new speed to the console;
+// 4. Create 2 car objects and experiment with calling 'accelerate' and 'brake' multiple times on each of them.
+
+// DATA CAR 1: 'BMW' going at 120 km/h
+// DATA CAR 2: 'Mercedes' going at 95 km/h
+
+// GOOD LUCK 😀
+
+/* Use a constructor function */
+/*
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(
+    `The ${this.make} speed was increased by 10 km/h. The new speed is ${this.speed}`
+  );
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(
+    `The ${this.make} speed decreased by 5 km/m. The new speed is ${this.speed}`
+  );
+};
+
+const bmw = new Car('BMW', 120);
+const mercedes = new Car('Mercedes', 95);
+
+bmw.accelerate();
+bmw.accelerate();
+bmw.brake();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.accelerate();
+mercedes.brake();
+*/
+
+/* Use an ES6 classes*/
+
+/*
 class Car {
   constructor(make, speed) {
     this.make = make;
@@ -278,12 +324,16 @@ class Car {
 
   accelerate() {
     this.speed += 10;
-    console.log(`${this.make} is going at ${this.speed} km/h`);
+    console.log(
+      `The ${this.make} speed was increased by 10 km/h. The new speed is ${this.speed}`
+    );
   }
 
   brake() {
     this.speed -= 5;
-    console.log(`${this.make} is going at ${this.speed} km/h`);
+    console.log(
+      `The ${this.make} speed decreased by 5 km/m. The new speed is ${this.speed}`
+    );
   }
 
   get speedUS() {
@@ -296,9 +346,220 @@ class Car {
 }
 
 const ford = new Car('Ford', 120);
-
-console.log(ford);
 ford.accelerate();
-console.log(ford.speedUS);
-ford.speedUS = 50;
+ford.speedUS = 10;
 console.log(ford);
+*/
+
+/* Use Object.create*/
+/*
+const CarProto = {
+  accelerate() {
+    this.speed += 10;
+    console.log(
+      `The ${this.make} speed was increased by 10 km/h. The new speed is ${this.speed}`
+    );
+  },
+
+  brake() {
+    this.speed -= 5;
+    console.log(
+      `The ${this.make} speed decreased by 5 km/m. The new speed is ${this.speed}`
+    );
+  },
+
+  init(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  },
+};
+
+const bmw = Object.create(CarProto);
+bmw.init('BMW', 120);
+
+console.log(bmw);
+*/
+
+// 215. Inheritance Between "Classes": Constructor Functions
+
+/*
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I'm study ${this.course}`);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Since');
+mike.introduce();
+mike.calcAge();
+console.log(mike);
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+Student.prototype.constructor = Student;
+console.log(mike);
+*/
+
+// 216. Coding Challenge #3
+
+/* 
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+
+DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+/*
+const Car = function (make, speed) {
+  this.speed = speed;
+  this.make = make;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(
+    `The ${this.make} speed was increased by 20 km/h. The new speed is ${this.speed}`
+  );
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(
+    `The ${this.make} speed decreased by 5 km/m. The new speed is ${this.speed}`
+  );
+};
+
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+
+// Link the prototype
+EV.prototype = Object.create(Car.prototype);
+
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `${this.make} going at ${this.speed} km/h, with a charge of ${this.charge}`
+  );
+};
+
+const tesla = new EV('Tesla', 120, 23);
+tesla.accelerate();
+tesla.accelerate();
+tesla.accelerate();
+tesla.chargeBattery(90);
+tesla.accelerate();
+tesla.brake();
+console.log(tesla);
+*/
+
+// 217. Inheritance Between "Classes": ES6 Classes
+/*
+class PersonCl {
+  constructor(fullName, birthYear) {
+    this.fullName = fullName;
+    this.birthYear = birthYear;
+  }
+
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+
+  greet() {
+    console.log(`Hey ${this.fullName}`);
+  }
+
+  get age() {
+    return 2037 - this.birthYear;
+  }
+
+  set fullName(name) {
+    if (name.includes(' ')) this._fullName = name;
+    else alert(`${name} is not a full name!`);
+  }
+
+  get fullName() {
+    return this._fullName;
+  }
+
+  static hey() {
+    console.log(`Hey there`);
+  }
+}
+
+class StudentCL extends PersonCl {
+  constructor(fullName, birthYear, course) {
+    super(fullName, birthYear);
+    this.course = course;
+  }
+
+  introduce = function () {
+    console.log(`My name is ${this.fullName} and I'm study ${this.course}`);
+  };
+
+  calcAge() {
+    console.log(`I'm ${2037 - this.birthYear} and I study.....`);
+  }
+}
+
+const martha = new StudentCL('Martha Jones', 2012, 'Computer Science');
+
+martha.introduce();
+martha.calcAge();
+*/
+
+// 218. Inheritance Between "Classes": Object.create
+/*
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+
+const StudentProto = Object.create(PersonProto);
+StudentProto.init = function (firstName, birthYear, course) {
+  PersonProto.init.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+StudentProto.introduce = function () {
+  console.log(`My name is ${this.firstName} and I'm study ${this.course}`);
+};
+
+const jay = Object.create(StudentProto);
+jay.init('Jay', 2010, 'Computer Science');
+jay.introduce();
+jay.calcAge();
+*/

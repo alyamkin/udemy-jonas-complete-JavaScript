@@ -563,3 +563,289 @@ jay.init('Jay', 2010, 'Computer Science');
 jay.introduce();
 jay.calcAge();
 */
+
+// Recap
+// Using function constructor
+/*
+const Car = function (make, speed) {
+  this.make = make;
+  this.speed = speed;
+};
+
+Car.prototype.accelerate = function () {
+  this.speed += 10;
+  console.log(
+    `The ${this.make} accelerate on 10 km/h, the current speed is ${this.speed}`
+  );
+};
+
+Car.prototype.brake = function () {
+  this.speed -= 5;
+  console.log(
+    `The ${this.make} brake on 5 km/h, the current speed is ${this.speed}`
+  );
+};
+
+const EVCar = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+EVCar.prototype = Object.create(Car.prototype);
+
+EVCar.prototype.chargeTo = function (chargeTo) {
+  this.charge = chargeTo;
+  console.log(`The battery charged to ${this.charge}`);
+};
+
+EVCar.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `The ${this.make} accelerate on 20 km/h, the current speed is ${this.speed}, the battery charge is ${this.charge}`
+  );
+};
+
+const tesla = new EVCar('Tesla', 140, 25);
+tesla.accelerate();
+console.log(tesla);
+*/
+// Using classes
+
+/*
+class Car {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate = function () {
+    this.speed += 10;
+    console.log(
+      `The ${this.make} accelerate on 10 km/h, the current speed is ${this.speed}`
+    );
+  };
+
+  brake = function () {
+    this.speed -= 5;
+    console.log(
+      `The ${this.make} brake on 5 km/h, the current speed is ${this.speed}`
+    );
+  };
+}
+
+class EVCar extends Car {
+  constructor(make, speed, charge) {
+    super(make, speed);
+    this.charge = charge;
+  }
+
+  accelerate = function () {
+    this.speed += 20;
+    this.charge--;
+    console.log(
+      `The ${this.make} accelerate on 20 km/h, the current speed is ${this.speed}, the battery charge is ${this.charge}`
+    );
+  };
+  chargeTo = function (chargeTo) {
+    this.charge = chargeTo;
+    console.log(`The battery charged to ${this.charge}`);
+  };
+}
+
+const tesla = new EVCar('Tesla', 140, 25);
+tesla.accelerate();
+tesla.brake();
+console.log(tesla);
+*/
+
+// Using Object create
+/*
+const CarProto = {
+  init(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  },
+
+  accelerate() {
+    this.speed += 10;
+    console.log(
+      `The ${this.make} accelerate on 10 km/h, the current speed is ${this.speed}`
+    );
+  },
+
+  brake() {
+    this.speed -= 5;
+    console.log(
+      `The ${this.make} brake on 5 km/h, the current speed is ${this.speed}`
+    );
+  },
+};
+
+const EVCarProto = Object.create(CarProto);
+EVCarProto.init = function (make, speed, charge) {
+  CarProto.init.call(this, make, speed);
+  this.charge = charge;
+};
+EVCarProto.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `The ${this.make} accelerate on 20 km/h, the current speed is ${this.speed}, the battery charge is ${this.charge}`
+  );
+};
+
+const tesla = Object.create(EVCarProto);
+tesla.init('Tesla', 140, 25);
+tesla.accelerate();
+tesla.brake();
+console.log(tesla);
+*/
+
+// 219. Another Class Example
+
+/*
+// 1) Public fields
+// 2) Private fields
+// 3) Public methods
+// 4) Private methods
+
+class Account {
+  // 1) Public fields (instances)
+  locale = navigator.language;
+
+  // 2) Private fields
+  #movements = [];
+  #pin;
+
+  constructor(owner, currency, pin) {
+    this.owner = owner;
+    this.currency = currency;
+    this.#pin = pin;
+    // protected
+    // this._movements = [];
+    // this.locale = navigator.language;
+
+    console.log(`Thanks for openening an account ${owner}`);
+  }
+  // 3) Public methods
+  // Public interface
+  getMovements() {
+    return this.#movements;
+  }
+
+  deposit(val) {
+    this.#movements.push(val);
+    return this;
+  }
+  _approveLoan(val) {
+    return true;
+  }
+
+  withdraw(val) {
+    this.deposit(-val);
+    return this;
+  }
+
+  requestLoan(val) {
+    if (this._approveLoan(val)) {
+      this.deposit(val);
+      console.log(`Loan approved`);
+      return this;
+    }
+  }
+
+  // 4) Private methods
+  // #approveLoan(val) {
+  //   return true;
+  // }
+}
+
+const acc1 = new Account('Jonas', 'EUR', 1111);
+
+// acc1.#movements.push(250); // Not accessible
+// acc1._movements.push(-140);
+
+acc1.deposit(250);
+acc1.withdraw(140);
+acc1.requestLoan(1000);
+
+// 220. Encapsulation: Protected Properties and Methods
+// 221. Encapsulation: Private Class Fields and Methods
+// 222. Chaining Methods
+acc1.deposit(300).deposit(500).withdraw(35).requestLoan(25000).withdraw(4000);
+console.log(acc1);
+console.log(acc1.getMovements());
+*/
+// 223. ES6 Classes Summary
+
+// 224. Coding Challenge #4
+
+/* 
+1. Use a constructor function to implement an Electric Car (called EV) as a CHILD "class" of Car. Besides a make and current speed, the EV also has the current battery charge in % ('charge' property);
+2. Implement a 'chargeBattery' method which takes an argument 'chargeTo' and sets the battery charge to 'chargeTo';
+3. Implement an 'accelerate' method that will increase the car's speed by 20, and decrease the charge by 1%. Then log a message like this: 'Tesla going at 140 km/h, with a charge of 22%';
+4. Create an electric car object and experiment with calling 'accelerate', 'brake' and 'chargeBattery' (charge to 90%). Notice what happens when you 'accelerate'! HINT: Review the definiton of polymorphism 😉
+
+DATA CAR 1: 'Tesla' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+/* 
+1. Re-create challenge #3, but this time using ES6 classes: create an 'EVCl' child class of the 'CarCl' class
+2. Make the 'charge' property private;
+3. Implement the ability to chain the 'accelerate' and 'chargeBattery' methods of this class, and also update the 'brake' method in the 'CarCl' class. They experiment with chining!
+
+DATA CAR 1: 'Rivian' going at 120 km/h, with a charge of 23%
+
+GOOD LUCK 😀
+*/
+
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+
+  accelerate() {
+    this.speed += 10;
+    console.log(
+      `The ${this.make} accelerate on 10 km/h, the current speed is ${this.speed}`
+    );
+  }
+
+  brake() {
+    this.speed -= 5;
+    console.log(
+      `The ${this.make} brake on 5 km/h, the current speed is ${this.speed}`
+    );
+  }
+}
+
+class EVCl extends CarCl {
+  #charge;
+  constructor(make, speed, charge) {
+    super(make, speed, charge);
+    this.#charge = charge;
+  }
+
+  chargeBattery(chargeTo) {
+    this.#charge = chargeTo;
+    return this;
+  }
+
+  accelerate() {
+    this.speed += 20;
+    this.#charge--;
+    console.log(
+      `${this.make} going at ${this.speed} km/h, with a charge of ${
+        this.#charge
+      }%`
+    );
+    return this;
+  }
+}
+
+const rivian = new EVCl('Rivian', 120, 23);
+rivian.accelerate().chargeBattery(90);
+console.log(rivian);

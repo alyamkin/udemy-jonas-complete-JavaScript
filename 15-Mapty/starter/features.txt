@@ -1,0 +1,16 @@
+1) Log my running workouts with location, distance, time, pace and steps/minute. 
+    map
+    geolocation
+    input form
+
+2) Log my cycling workouts with location, distance, time, speed and elevation gain.
+    input form
+
+3) See all my workouts at a glance.
+    list
+
+4) See my workouts on a map.
+    display list on the map
+
+5) See all my workouts when I leave the app and come back later.
+    store data in the local storage of the browser browser

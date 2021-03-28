@@ -1372,3 +1372,61 @@ const internationalDate = new Intl.DateTimeFormat(
 
 console.log(now);
 */
+
+// Inheritance
+// Function constructor
+/*
+const Person = function (name, birthDate) {
+  this.name = name;
+  this.birthDate = birthDate;
+};
+
+Person.prototype.calcAge = function () {
+  return 2021 - this.birthDate;
+};
+
+const Student = function (name, birthDate, program, gpa) {
+  Person.call(this, name, birthDate);
+  this.program = program;
+  this.gpa = gpa;
+};
+
+Student.prototype = Object.create(Person.prototype);
+
+// ES6 Classes
+
+class PersonCL {
+  constructor(name, birthDate) {
+    this.name = name;
+    this.birthDate = birthDate;
+  }
+
+  calcAge = function () {
+    return 2021 - this.birthDate;
+  };
+}
+
+class StudentCL extends PersonCL {
+  constructor(name, birthDate, program, gpa) {
+    super(name, birthDate);
+    this.program = program;
+    this.gpa = gpa;
+  }
+}
+
+const andrey = new Student("Andrey", 1985, "Math", 4.2);
+const yana = new StudentCL("Yana", 1982, "Math", 5);
+console.log(andrey);
+console.log(yana);
+*/
+
+const returnDivisionByTwo = function () {
+  let div = 2;
+  return function (num) {
+    return num / div;
+  };
+};
+
+const divisionByTwo = returnDivisionByTwo();
+
+console.log(divisionByTwo(10));
